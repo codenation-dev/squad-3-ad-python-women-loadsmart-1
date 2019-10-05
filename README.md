@@ -1,22 +1,21 @@
 # Central de erros 
 (Squad-3 - Python Women Loadsmart)
 
- Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações.
+In this project is a aplication to register error logs.
 
-A arquitetura do projeto é formada por:
-- Back-End Restfull API
-- Front-End
+The project architecture consists of:
+- Backfull Restfull API
+- Front End
 
+## Requirements
 
-## Requisitos
+You must have python 3.6 (ou superior), pip, postgres.
 
-Você precisará de python 3.6 (ou superior), do gerenciador de pacotes pip, postgres.
-
-Para os testes de autenticação recomendamos a extensão "Modify headers" do Chrome.
+For Authentication Tests we recomend the extension "Modify headers" (Chrome).
  
-Postgres : No  terminal linux - sudo apt install postgresql-server-dev-all
+Postgres : Open your linux terminal - sudo apt install postgresql-server-dev-all
 
-O recomendado é você utilizar um [ambiente virtual]. Para isto, execute os comandos como no exemplo abaixo:
+We recommend use a virtual env:
 
     pip3 install virtualenv
     virtualenv venv -p python3
@@ -29,14 +28,10 @@ O recomendado é você utilizar um [ambiente virtual]. Para isto, execute os com
 
 
 
-Ao terminar o desafio, você pode sair do ambiente criado com o comando `deactivate`
-
-
-## Documentação 
+## Documentation 
 
 http://127.0.0.1:8000/doc/
 
-Acessar http://editor.swagger.io/ e colar o conteúdo do doc
+Acess http://editor.swagger.io/ and past the content.
 
-Imagem
 ![](https:  /challenge.png)
