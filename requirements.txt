@@ -1,0 +1,11 @@
+django
+flake8
+djangorestframework
+django-rest-auth
+django-allauth
+pillow
+pyyaml
+psycopg2
+psycopg2-binary
+openapi
+uritemplate
