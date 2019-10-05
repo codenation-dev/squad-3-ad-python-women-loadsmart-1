@@ -1,6 +1,5 @@
-# squad-3-ad-python-women-loadsmart-1
-
-# Central de erros
+# Central de erros 
+(Squad-3 - Python Women Loadsmart)
 
  Neste projeto vamos implementar um sistema para centralizar registros de erros de aplicações.
 
