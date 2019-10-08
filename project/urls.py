@@ -24,5 +24,6 @@ schema_view = get_schema_view(title=" Api Documentation")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('core.urls')),
+    path('user/',include('user.urls')),
     path('doc/',schema_view), #openapi documentation
 ]

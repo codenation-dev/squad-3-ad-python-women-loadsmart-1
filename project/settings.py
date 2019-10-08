@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'rest_auth.registration',
-    'core'
+    'core',
+    'user',
 ]
 
 MIDDLEWARE = [
@@ -145,7 +146,7 @@ SITE_ID=1
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
+AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
