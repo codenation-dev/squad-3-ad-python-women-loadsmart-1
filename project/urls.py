@@ -15,7 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include 
+<<<<<<< HEAD
+=======
 
+>>>>>>> a837608f3b5324b28533377aa045a1afa531e965
 from rest_framework.schemas import get_schema_view
 
 schema_view = get_schema_view(title=" Api Documentation")

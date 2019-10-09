@@ -41,8 +41,11 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
+<<<<<<< HEAD
+=======
     'allauth',
     'allauth.account',
+>>>>>>> a837608f3b5324b28533377aa045a1afa531e965
     'rest_auth.registration',
     'core',
     'user',
@@ -117,12 +120,42 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
+<<<<<<< HEAD
+   
+]
+
+
+# Modified 
+REST_AUTH_SERIALIZERS = {
+    'LOGIN_SERIALIZER': 'user.serializers.CustomLoginSerializer',
+}
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Modified
+AUTH_USER_MODEL = 'core.User'
+
+REST_FRAMEWORK = {
+    'PAGE_SIZE': 10,
+    'DEFAULT_PAGINATION_CLASS':
+    'rest_framework.pagination.PageNumberPagination',
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+        
+    ]
+}
+
+
+
+=======
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
 
+>>>>>>> a837608f3b5324b28533377aa045a1afa531e965
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -144,6 +177,8 @@ STATIC_URL = '/static/'
 
 SITE_ID=1
 
+<<<<<<< HEAD
+=======
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'core.User'
@@ -158,3 +193,4 @@ REST_FRAMEWORK = {
     ]
 }
 
+>>>>>>> a837608f3b5324b28533377aa045a1afa531e965
