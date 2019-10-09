@@ -41,11 +41,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'rest_auth',
-<<<<<<< HEAD
-=======
-    'allauth',
-    'allauth.account',
->>>>>>> a837608f3b5324b28533377aa045a1afa531e965
     'rest_auth.registration',
     'core',
     'user',
@@ -120,7 +115,6 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
-<<<<<<< HEAD
    
 ]
 
@@ -148,14 +142,6 @@ REST_FRAMEWORK = {
 
 
 
-=======
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-
->>>>>>> a837608f3b5324b28533377aa045a1afa531e965
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
@@ -177,8 +163,6 @@ STATIC_URL = '/static/'
 
 SITE_ID=1
 
-<<<<<<< HEAD
-=======
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'core.User'
@@ -193,4 +177,3 @@ REST_FRAMEWORK = {
     ]
 }
 
->>>>>>> a837608f3b5324b28533377aa045a1afa531e965
