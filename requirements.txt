@@ -9,3 +9,4 @@ psycopg2
 psycopg2-binary
 openapi
 uritemplate
+django-cors-headers
