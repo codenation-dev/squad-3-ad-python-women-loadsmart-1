@@ -125,9 +125,10 @@ REST_AUTH_SERIALIZERS = {
 }
 
 
+# Modified
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-# Modified
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
@@ -139,7 +140,6 @@ REST_FRAMEWORK = {
         
     ]
 }
-
 
 
 # Internationalization
@@ -162,18 +162,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 SITE_ID=1
-
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-AUTH_USER_MODEL = 'core.User'
-
-REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
-    'DEFAULT_PAGINATION_CLASS':
-    'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-        
-    ]
-}
 
