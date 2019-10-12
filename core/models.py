@@ -45,11 +45,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         user = super().update(instance, validated_data)
 
 
-class Erros(models.Model):
-    title = models.CharField(max_length=200)
+class Errors(models.Model):
+    title= models.CharField(max_length=200)
     description = models.TextField()
-
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.title
+    detail = models.TextField()
+    date_log = models.DateTimeField()
+    sources = models.CharField(max_length=12)
+    status_active = models.BooleanField(default=True)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)

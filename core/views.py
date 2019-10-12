@@ -4,7 +4,7 @@ from core import models
 from core import serializers
 
 
-class ListErros(generics.ListCreateAPIView):
+class ListErrors(generics.ListCreateAPIView):
     """
     get:
     Return a list of all existing .
@@ -13,11 +13,11 @@ class ListErros(generics.ListCreateAPIView):
     Create a new .
     """
 
-    queryset = models.Erros.objects.all()
-    serializer_class = serializers.ErrosSerializer
+    queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsSerializer
 
 
-class DetailErro(generics.RetrieveUpdateDestroyAPIView):
+class DetailError(generics.RetrieveUpdateDestroyAPIView):
     """
     get:
     Return a all fields of a selected "Erros".
@@ -28,5 +28,5 @@ class DetailErro(generics.RetrieveUpdateDestroyAPIView):
     delete: 
     """
 
-    queryset = models.Erros.objects.all()
-    serializer_class = serializers.ErrosSerializer
+    queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsSerializer
