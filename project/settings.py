@@ -31,20 +31,21 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
+   'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # modified
-    'rest_framework',
-    'rest_framework.authtoken',
     'rest_auth',
     'rest_auth.registration',
+    'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
-    'core',
     'user',
+    'core',
+    
 
 ]
 
@@ -92,15 +93,15 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}
+}'''
 
 
-'''
+
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('APP_DB_ENGINE', 'django.db.backends.postgresql'),
@@ -112,7 +113,6 @@ DATABASES = {
     }
 }
 
-'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -136,6 +136,9 @@ REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'user.serializers.CustomLoginSerializer',
 }
 
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 
 # Modified
 

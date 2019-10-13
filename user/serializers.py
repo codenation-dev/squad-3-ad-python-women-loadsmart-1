@@ -33,6 +33,8 @@ class CustomLoginSerializer(serializers.Serializer):
 
     # Need modify REST_AUTH_SERIALIZERS 'LOGIN_SERIALIZER': 
     # https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/serializers.py
+    
+    name = 'name' # fix bug send this on post request, is not required field
     email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(style={'input_type': 'password'})
 
