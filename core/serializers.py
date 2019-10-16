@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from core import models
+from .models import Errors
 
 
 class ErrorsSerializer(serializers.ModelSerializer):
@@ -7,11 +8,12 @@ class ErrorsSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'title',
+            'level',
             'description',
             'detail',
             'date_log',
             'sources',
-            'status_is_active',
+            'status_active',
             'user', 
        )
         model = models.Errors
