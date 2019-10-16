@@ -46,10 +46,28 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Errors(models.Model):
-    title= models.CharField(max_length=200)
+    title = models.CharField(max_length=200)
+    level = models.CharField(max_length=200)
+    ERROR='ERROR'
+    DEBUG='DEBUG'
+    WARNING='WARNING'
+    LEVEL= [
+        (ERROR,('ERROR')),
+        (DEBUG,('DEBUG')),
+        (WARNING,('WARNING')),
+    ]
+    level = models.CharField(
+        max_length=32,
+        choices=LEVEL,
+        default=ERROR
+    )
     description = models.TextField()
     detail = models.TextField()
     date_log = models.DateTimeField()
     sources = models.CharField(max_length=12)
     status_active = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
+    
+    def __str__(self):
+        """A string representation of the model."""
+        return self.title
