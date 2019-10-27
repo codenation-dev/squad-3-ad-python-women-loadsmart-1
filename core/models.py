@@ -46,6 +46,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Errors(models.Model):
+  
     title = models.CharField(max_length=200)
     level = models.CharField(max_length=200)
     ERROR='ERROR'
@@ -61,11 +62,22 @@ class Errors(models.Model):
         choices=LEVEL,
         default=ERROR
     )
+    DEVELOPMENT='DEVELOPMENT'
+    TESTING='TESTING'
+    PRODUCTION='PRODUCTION'
+    SOURCE=[
+        (DEVELOPMENT,('DEVELOPMENT')),
+        (TESTING,('TESTING')),
+        (PRODUCTION,('PRODUCTION')),
+    ]
+    sources = models.CharField(
+        max_length=32,
+        choices=SOURCE,
+    )
     description = models.TextField()
     detail = models.TextField()
     date_log = models.DateTimeField()
-    sources = models.CharField(max_length=12)
-    status_active = models.BooleanField(default=True)
+    status_active = models.BooleanField(default=False)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
     
     def __str__(self):
