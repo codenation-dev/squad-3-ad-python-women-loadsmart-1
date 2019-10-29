@@ -10,18 +10,23 @@ from core import serializers
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+
 class ListErrors(mixins.ListModelMixin,
                  generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
-    serializer_class = serializers.ErrorsSerializer
 
-class ListErros(generics.ListCreateAPIView):
-    permission_classes = (IsAuthenticated,)
-
+    """ 
+    List all erros only get is avaiable
     """
-    get:
-    Return a list of all existing ."""
+
+    filterset_fields = ['sources']
+
+    def get(self, request, format=None):
+        erros = models.Errors.objects.all()
+        serializer = serializers.ErrorsSerializer(erros, many=True)
+        return Response(serializer.data)
+    
 
 class createError(mixins.CreateModelMixin,
                  generics.GenericAPIView):
@@ -32,6 +37,23 @@ class createError(mixins.CreateModelMixin,
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
+
+class FilterErrors(mixins.CreateModelMixin,
+                 generics.GenericAPIView):
+
+    
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Errors.objects.filter(sources='PRODUCTION')
+
+    """ 
+    List all erros by filtering field sources
+    """
+
+    def get(self, request, format=None):
+
+        erros = models.Errors.objects.filter(sources='PRODUCTION')
+        serializer = serializers.ErrorsSerializer(erros, many=True)
+        return Response(serializer.data)
 
 
 class DetailError(generics.RetrieveUpdateDestroyAPIView):
@@ -49,4 +71,6 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = models.Errors.objects.all()
     serializer_class = serializers.ErrorsDetailSerializer
+
+
 

@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
 
@@ -46,9 +47,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Errors(models.Model):
-  
-    title = models.CharField(max_length=200)
-    level = models.CharField(max_length=200)
+    """Model representation Title, log, description, 
+    level, source, active(flag), foreingkey(user)."""
+
+
     ERROR='ERROR'
     DEBUG='DEBUG'
     WARNING='WARNING'
@@ -57,11 +59,7 @@ class Errors(models.Model):
         (DEBUG,('DEBUG')),
         (WARNING,('WARNING')),
     ]
-    level = models.CharField(
-        max_length=32,
-        choices=LEVEL,
-        default=ERROR
-    )
+    
     DEVELOPMENT='DEVELOPMENT'
     TESTING='TESTING'
     PRODUCTION='PRODUCTION'
@@ -70,12 +68,27 @@ class Errors(models.Model):
         (TESTING,('TESTING')),
         (PRODUCTION,('PRODUCTION')),
     ]
+
+    title = models.CharField(max_length=200)
+    log = models.CharField(max_length=200)
+    level = models.CharField(
+        max_length=32,
+        choices=LEVEL,
+        default=ERROR
+    )
+  
     sources = models.CharField(
         max_length=32,
         choices=SOURCE,
     )
     description = models.TextField()
     user = models.ForeignKey('core.User', blank=True, null=True, on_delete=models.CASCADE)
+
+    active = models.CharField(max_length=1, default = 'T') # T - True F - False
+    events = models.IntegerField(default=1)
+    date = models.DateTimeField (default= timezone.now)
+    
+
 
     def __str__(self):
         """A string representation of the model."""
