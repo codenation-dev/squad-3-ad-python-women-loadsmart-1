@@ -1,27 +1,37 @@
+
 from django.shortcuts import render
 from rest_framework import generics
+from rest_framework import mixins
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework import status
 from core import models
 from core import serializers
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
+class ListErrors(mixins.ListModelMixin,
+                 generics.GenericAPIView):
+    queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsSerializer
 
 class ListErros(generics.ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
 
     """
     get:
-    Return a list of all existing .
+    Return a list of all existing ."""
 
-    post:
-    Create a new .
-    """
+class createError(mixins.CreateModelMixin,
+                 generics.GenericAPIView):
+    queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsDetailSerializer
 
-    queryset = models.Erros.objects.all()
-    serializer_class = serializers.ErrosSerializer
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
 
 
-class DetailErro(generics.RetrieveUpdateDestroyAPIView):
+class DetailError(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
 
     """
@@ -34,5 +44,6 @@ class DetailErro(generics.RetrieveUpdateDestroyAPIView):
     delete: 
     """
 
-    queryset = models.Erros.objects.all()
-    serializer_class = serializers.ErrosSerializer
+    queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsDetailSerializer
+

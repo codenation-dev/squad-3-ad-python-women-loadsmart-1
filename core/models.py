@@ -45,8 +45,35 @@ class User(AbstractBaseUser, PermissionsMixin):
         user = super().update(instance, validated_data)
 
 
-class Erros(models.Model):
+class Errors(models.Model):
+  
     title = models.CharField(max_length=200)
+    level = models.CharField(max_length=200)
+    ERROR='ERROR'
+    DEBUG='DEBUG'
+    WARNING='WARNING'
+    LEVEL= [
+        (ERROR,('ERROR')),
+        (DEBUG,('DEBUG')),
+        (WARNING,('WARNING')),
+    ]
+    level = models.CharField(
+        max_length=32,
+        choices=LEVEL,
+        default=ERROR
+    )
+    DEVELOPMENT='DEVELOPMENT'
+    TESTING='TESTING'
+    PRODUCTION='PRODUCTION'
+    SOURCE=[
+        (DEVELOPMENT,('DEVELOPMENT')),
+        (TESTING,('TESTING')),
+        (PRODUCTION,('PRODUCTION')),
+    ]
+    sources = models.CharField(
+        max_length=32,
+        choices=SOURCE,
+    )
     description = models.TextField()
     user = models.ForeignKey('core.User', blank=True, null=True, on_delete=models.CASCADE)
 
