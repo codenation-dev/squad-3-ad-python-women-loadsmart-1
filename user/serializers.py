@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
-
+from core.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     '''Customized User serializer model in core.model'''
@@ -54,6 +54,15 @@ class CustomLoginSerializer(serializers.Serializer):
 
         attrs['user'] = user
         return attrs
+
+
+class CustomUserDetailsSerializer(serializers.ModelSerializer):
+    '''Customized User detail model in core.model instead to username use email'''
+
+
+    class Meta:
+        model = User
+        fields = '__all__'
 
 
   

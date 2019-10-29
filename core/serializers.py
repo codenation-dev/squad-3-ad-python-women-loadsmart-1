@@ -8,6 +8,9 @@ class ErrosSerializer(serializers.ModelSerializer):
             'id',
             'title',
             'description',
-          
+            'user',
+                     
        )
         model = models.Erros
+
+    

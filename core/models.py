@@ -48,7 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Erros(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
-
+    user = models.ForeignKey('core.User', blank=True, null=True, on_delete=models.CASCADE)
 
     def __str__(self):
         """A string representation of the model."""

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 import django_heroku
+from datetime import timedelta
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -40,10 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # modified
-    'rest_auth',
     'rest_auth.registration',
     'rest_framework',
-    'rest_framework.authtoken',
     'corsheaders',
     'user',
     'core',
@@ -108,7 +108,7 @@ DATABASES = {
     'default': {
         'ENGINE': os.environ.get('APP_DB_ENGINE', 'django.db.backends.postgresql'),
         'HOST': os.environ.get('DB_HOST','127.0.0.1'),
-        'NAME': os.environ.get('DB_NAME', 'mydb'),    
+        'NAME': os.environ.get('DB_NAME', 'central'),    
         'USER': os.environ.get('DB_USER','postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD','secret'),
         'BYPASS_CREATION':'yes',
@@ -136,6 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Modified 
 REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'user.serializers.CustomLoginSerializer',
+    'USER_DETAILS_SERIALIZER':'user.serializers.CustomUserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'rest_auth.serializers.TokenSerializer',
+
 }
 
 CORS_ORIGIN_WHITELIST = (
@@ -144,18 +147,45 @@ CORS_ORIGIN_WHITELIST = (
 
 # Modified
 
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    #'SIGNING_KEY': settings.SECRET_KEY,
+    'VERIFYING_KEY': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
+
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
-    'DEFAULT_PAGINATION_CLASS':
-    'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-        
-    ]
+    ),
 }
 
 

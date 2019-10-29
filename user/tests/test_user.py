@@ -21,10 +21,10 @@ class PublicUserApiTests(TestCase):
        res = self.client.post('http://127.0.0.1:8000/users/register/', payload)
        user = get_user_model().objects.get(**res.data)
        
-
-
     def test_create_valid_user_success(self):
-        """Test creating using with a valid payload is successful"""
+        """Test creating using with a valid payload is successful
+        Read more about django statuscodes:
+        https://www.django-rest-framework.org/api-guide/status-codes/"""
         payload = {
             'email': 'test@test-api.com',
             'password': 'testpass',
@@ -65,18 +65,19 @@ class PublicUserApiTests(TestCase):
 
     def test_create_token_missing_field(self):
         """Test that email and password are required"""
-        payload = {'email': 'one', 'password': ''}
-        res = self.client.post('http://127.0.0.1:8000/users/login/',payload )
-        self.assertIn('email', res.data)
-        self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
+        
+        payload = {'email': 'test2@test-api.com', 'password': 'wrong'}
+        res = self.client.post('http://127.0.0.1:8000/api/token/',payload )
+        self.assertIn('detail', res.data)
+        self.assertEqual(res.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_create_token_all_field(self):
         """Test that email and password are required"""
         #create user and verify if login with the same
         #email and password returns the key (token)
 
-        payload = {'email': 'pameperes@gmail.com', 'password': '123456'}
+        payload = {'email': 'test2@test-api.com', 'password': 'testpass'}
         get_user_model().objects.create_user(**payload)
-        res = self.client.post('http://127.0.0.1:8000/users/login/',payload)
-        self.assertIn('key', res.data)
+        res = self.client.post('http://127.0.0.1:8000/api/token/',payload)
+        self.assertIn('refresh', res.data)
         

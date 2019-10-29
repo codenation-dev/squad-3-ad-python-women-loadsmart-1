@@ -16,6 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 from rest_framework.schemas import get_schema_view
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 schema_view = get_schema_view(title=" Api Documentation")
 
@@ -23,6 +27,8 @@ schema_view = get_schema_view(title=" Api Documentation")
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',include('core.urls')),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/',include('user.urls')),
     path('doc/',schema_view), #openapi documentation
 ]
