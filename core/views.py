@@ -12,6 +12,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class ListErrors(mixins.ListModelMixin,
                  generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
     serializer_class = serializers.ErrorsSerializer
 
@@ -24,6 +25,8 @@ class ListErros(generics.ListCreateAPIView):
 
 class createError(mixins.CreateModelMixin,
                  generics.GenericAPIView):
+    
+    permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
     serializer_class = serializers.ErrorsDetailSerializer
 
