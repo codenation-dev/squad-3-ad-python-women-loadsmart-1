@@ -10,6 +10,7 @@ class ErrorsSerializer(serializers.ModelSerializer):
     '''return a basic information about the error whitout details'''
     class Meta:
         fields = (
+            'id',
             'sources',
             'title',
             'log',

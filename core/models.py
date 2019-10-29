@@ -84,7 +84,7 @@ class Errors(models.Model):
     description = models.TextField()
     user = models.ForeignKey('core.User', blank=True, null=True, on_delete=models.CASCADE)
 
-    active = models.CharField(max_length=1, default = 'T') # T - True F - False
+    is_active = models.BooleanField(default=True)
     events = models.IntegerField(default=1)
     date = models.DateTimeField (default= timezone.now)
     

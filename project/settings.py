@@ -29,7 +29,7 @@ SECRET_KEY = '%c_$%9jo(8fphl+86(zd%_tpe_%9itr*49!xb(evhn!7ndq+wb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
 
 # Application definition
@@ -69,7 +69,7 @@ MIDDLEWARE = [
 #https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 #allow different origin acess all endpoint 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 
 ROOT_URLCONF = 'project.urls'
 

@@ -15,6 +15,8 @@ class ListErrors(mixins.ListModelMixin,
                  generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
+    serializer_class = serializers.ErrorsSerializer
+
 
     """ 
     List all erros only get is avaiable
@@ -41,7 +43,7 @@ class createError(mixins.CreateModelMixin,
 class FilterErrors(mixins.CreateModelMixin,
                  generics.GenericAPIView):
 
-    
+    serializer_class = serializers.ErrorsSerializer
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.filter(sources='PRODUCTION')
 
