@@ -15,11 +15,15 @@ class ErrorsSerializer(serializers.ModelSerializer):
             'title',
             'log',
             'level',
+            'is_active',
+            'date'
        )
         model = models.Errors
 
 class ErrorsCreateSerializer(serializers.ModelSerializer):
-    '''return a basic information about the error whitout details'''
+    '''Customized selializer to create a new error 
+    hide user and set a current user. No need set date because by default
+    use the time now'''
 
     user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
@@ -31,8 +35,7 @@ class ErrorsCreateSerializer(serializers.ModelSerializer):
             'log',
             'level',
             'user'
-    
-            
+              
        )
         model = models.Errors
 
@@ -40,6 +43,8 @@ class ErrorsCreateSerializer(serializers.ModelSerializer):
 
 
 class ErrorsDetailSerializer(serializers.ModelSerializer):
-      class Meta:
+    '''Return all the fields from a especific error'''
+    
+    class Meta:
         model = models.Errors
         fields = '__all__'

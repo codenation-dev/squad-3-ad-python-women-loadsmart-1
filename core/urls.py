@@ -5,6 +5,5 @@ urlpatterns = [
     path('central/', views.ListErrors.as_view()),
     path('central/<int:pk>/', views.DetailError.as_view()),
     path('central/create', views.createError.as_view()),
-    path('central/production/', views.FilterErrors.as_view(),)
     #The DRF provide  endpoints for the users (login/logout/token/etc)
 ]

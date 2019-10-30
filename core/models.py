@@ -8,7 +8,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **extra_fields):
-        """Creates and saves a new user"""
+        """Creates and saves a new customized user
+        no need username"""
         if not email:
             raise ValueError('Users must have an email address')
         user = self.model(email=self.normalize_email(email), **extra_fields)
@@ -36,8 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    
-
+    # methods from User Manager
     objects = UserManager()
     
     def update(self, instance, validated_data):
@@ -86,7 +86,7 @@ class Errors(models.Model):
 
     is_active = models.BooleanField(default=True)
     events = models.IntegerField(default=1)
-    date = models.DateTimeField (default= timezone.now)
+    created = models.DateTimeField (default= timezone.now)
     
 
 

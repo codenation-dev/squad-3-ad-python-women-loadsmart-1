@@ -5,33 +5,63 @@ from rest_framework import mixins
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
+from rest_framework import filters
+from django_filters import rest_framework as filtersfield
+
+
 from core import models
 from core import serializers
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 
+
 class ListErrors(mixins.ListModelMixin,
                  generics.GenericAPIView):
-    permission_classes = (IsAuthenticated,)
-    queryset = models.Errors.objects.all()
-    serializer_class = serializers.ErrorsSerializer
-
 
     """ 
-    List all erros only get is avaiable
+    get: 
+        return a list of all active erros 
+    filters: 
+        SearchFilter => fields: 'sources', 'level'
+        FilterSet => 'title', 'description' (using crysping forms)
+   
+        examples:
+         /?sources=TESTING&level=WARNING
+         /?search=keyword+anotherword
+    ordering: by source, level and date
     """
 
-    filterset_fields = ['sources']
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Errors.objects.filter(is_active=True)
+    serializer_class = serializers.ErrorsSerializer
 
-    def get(self, request, format=None):
-        erros = models.Errors.objects.all()
-        serializer = serializers.ErrorsDetailSerializer(erros, many=True)
-        return Response(serializer.data)
+    filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
+
+    search_fields = ['title', 'description']
+    filterset_fields = ['sources', 'level']
+    ordering_fields = ['sources', 'level','created']
+    ordering = ['created'] #default order
+
+
+
+    
+    #this allow client make a search 
+    #http://127.0.0.1:8000/central?search=keyword+anotherword
+    #this allow client make a search 
+    #http://127.0.0.1:8000/central/?sources=TESTING&level=WARNING
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
     
 
 class createError(mixins.CreateModelMixin,
                  generics.GenericAPIView):
+
+    ''' 
+    post:
+    This allow client insert a new error data 
+    user, is_active and date are hidden'''
     
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
@@ -40,26 +70,8 @@ class createError(mixins.CreateModelMixin,
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-class FilterErrors(mixins.CreateModelMixin,
-                 generics.GenericAPIView):
-
-    serializer_class = serializers.ErrorsSerializer
-    permission_classes = (IsAuthenticated,)
-    queryset = models.Errors.objects.filter(sources='PRODUCTION')
-
-    """ 
-    List all erros by filtering field sources
-    """
-
-    def get(self, request, format=None):
-
-        erros = models.Errors.objects.filter(sources='PRODUCTION')
-        serializer = serializers.ErrorsSerializer(erros, many=True)
-        return Response(serializer.data)
-
 
 class DetailError(generics.RetrieveUpdateDestroyAPIView):
-    permission_classes = (IsAuthenticated,)
 
     """
     get:
@@ -70,9 +82,12 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 
     delete: 
     """
-
+    permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
     serializer_class = serializers.ErrorsDetailSerializer
 
+    
+
+    
 
 
