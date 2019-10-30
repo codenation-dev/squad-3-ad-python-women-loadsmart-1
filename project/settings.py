@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-   'django.contrib.admin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'user',
     'core',
+    'rest_framework_swagger',    
     
 
 ]
@@ -187,7 +188,8 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     ),
     'DEFAULT_FILTER_BACKENDS': (
-        'django_filters.rest_framework.DjangoFilterBackend',),
+        'django_filters.rest_framework.DjangoFilterBackend',), 
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' # to swagger documentation UI
 }
 
 

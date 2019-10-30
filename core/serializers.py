@@ -16,7 +16,7 @@ class ErrorsSerializer(serializers.ModelSerializer):
             'log',
             'level',
             'is_active',
-            'date'
+            'created'
        )
         model = models.Errors
 
@@ -43,8 +43,11 @@ class ErrorsCreateSerializer(serializers.ModelSerializer):
 
 
 class ErrorsDetailSerializer(serializers.ModelSerializer):
-    '''Return all the fields from a especific error'''
+    '''Return all the fields from a especific error
+    for update some fields are declared as read only'''
     
     class Meta:
         model = models.Errors
         fields = '__all__'
+        read_only_fields = ('user','created','log','events')
+        

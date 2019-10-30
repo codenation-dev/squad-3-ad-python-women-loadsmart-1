@@ -22,11 +22,12 @@ class ListErrors(mixins.ListModelMixin,
     """ 
     get: 
         return a list of all active erros 
+        
     filters: 
         SearchFilter => fields: 'sources', 'level'
         FilterSet => 'title', 'description' (using crysping forms)
    
-        examples:
+    examples:
          /?sources=TESTING&level=WARNING
          /?search=keyword+anotherword
     ordering: by source, level and date
@@ -60,8 +61,8 @@ class createError(mixins.CreateModelMixin,
 
     ''' 
     post:
-    This allow client insert a new error data 
-    user, is_active and date are hidden'''
+        This allow client insert a new error data 
+        user, is_active and date are hidden'''
     
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
@@ -75,12 +76,13 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 
     """
     get:
-    Return a all fields of a selected "Erros".
+    Return all the fields from a especific error
 
     put:
-    Update  Erro.
+    partial update some fields are declared as read only
 
     delete: 
+    destroy object
     """
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
