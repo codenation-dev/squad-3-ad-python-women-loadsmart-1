@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import django_heroku
+#import django_heroku
 from datetime import timedelta
 
 
@@ -94,15 +94,15 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-'''DATABASES = {
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-}'''
+}
 
 
-
+'''
 DATABASES = {
     'default': {
         'ENGINE': os.environ.get('APP_DB_ENGINE', 'django.db.backends.postgresql'),
@@ -113,7 +113,7 @@ DATABASES = {
         'BYPASS_CREATION':'yes',
     }
 }
-
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -213,5 +213,5 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 
 SITE_ID=1
 
-django_heroku.settings(locals())
+#django_heroku.settings(locals())
 

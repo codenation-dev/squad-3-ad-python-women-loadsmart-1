@@ -26,7 +26,7 @@ class ListErrors(mixins.ListModelMixin,
 
     def get(self, request, format=None):
         erros = models.Errors.objects.all()
-        serializer = serializers.ErrorsSerializer(erros, many=True)
+        serializer = serializers.ErrorsDetailSerializer(erros, many=True)
         return Response(serializer.data)
     
 
@@ -35,8 +35,8 @@ class createError(mixins.CreateModelMixin,
     
     permission_classes = (IsAuthenticated,)
     queryset = models.Errors.objects.all()
-    serializer_class = serializers.ErrorsDetailSerializer
-
+    serializer_class = serializers.ErrorsCreateSerializer
+    
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
