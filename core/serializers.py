@@ -46,6 +46,12 @@ class ErrorsDetailSerializer(serializers.ModelSerializer):
     '''Return all the fields from a especific error
     for update some fields are declared as read only'''
     
+    user = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='name'
+     )
+
+     # show name instead of the related pk id
     class Meta:
         model = models.Errors
         fields = '__all__'

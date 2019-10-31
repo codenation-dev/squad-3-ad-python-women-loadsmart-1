@@ -30,9 +30,9 @@ schema_view_swagger = get_swagger_view(title='Central de Erros API')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('core.urls')),
+    path('api/',include('core.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('users/',include('user.urls')),
     path('openapi/',schema_view), #openapi documentation
     url(r'doc/', schema_view_swagger) # swagger UI interface 

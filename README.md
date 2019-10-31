@@ -5,7 +5,7 @@ In this project is a aplication to register error logs.
 
 The project architecture consists of:
 - Backend Restfull API
-- Front End
+- Front End (React)
 
 ## Requirements
 
