@@ -29,6 +29,7 @@ We recommend use a virtual env:
     
 ## Frontend (folder front end)
  install reduxDevtool extension for Chrome
+ 
  npm start
 
 ## Documentation 
