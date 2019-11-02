@@ -223,4 +223,3 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 SITE_ID=1
 
 #django_heroku.settings(locals())
-

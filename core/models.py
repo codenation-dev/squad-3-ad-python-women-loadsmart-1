@@ -3,6 +3,8 @@ from django.conf import settings
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
+from django.core.validators import validate_ipv4_address
+
 
 
 class UserManager(BaseUserManager):
@@ -45,8 +47,20 @@ class User(AbstractBaseUser, PermissionsMixin):
         password = validated_data.pop('password', None)
         user = super().update(instance, validated_data)
 
+class Agent(models.Model):
+    name = models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
+    address = models.GenericIPAddressField(validators=[validate_ipv4_address], null=True)
+    status = models.BooleanField(default=False)
+    env = models.CharField(max_length=20)
+    version = models.CharField(max_length=5)
 
-class Errors(models.Model):
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+class Error(models.Model):
     """Model representation Title, log, description, 
     level, source, active(flag), foreingkey(user)."""
 
@@ -85,11 +99,14 @@ class Errors(models.Model):
     user = models.ForeignKey('core.User', blank=True, null=True, on_delete=models.CASCADE)
 
     is_active = models.BooleanField(default=True)
-    events = models.IntegerField(default=1)
     created = models.DateTimeField (default= timezone.now)
+    agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
+
     
 
 
     def __str__(self):
         """A string representation of the model."""
         return self.title
+
+

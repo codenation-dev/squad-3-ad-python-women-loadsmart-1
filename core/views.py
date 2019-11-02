@@ -15,13 +15,40 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 
+class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
+    '''Get : all Agents by user 
+        Post : create a new Agent
+    '''
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Agent.objects.all()
+    serializer_class = serializers.AgentSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
 
-class ListErrors(mixins.ListModelMixin,
+
+
+
+class CreateAgent(mixins.CreateModelMixin,
+                 generics.GenericAPIView):
+
+    ''' 
+    post:
+        This allow client insert a new Agent  
+        user = is_active'''
+    
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Agent.objects.all()
+    serializer_class = serializers.AgentCreateSerializer
+    
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class ListError(mixins.ListModelMixin,
                  generics.GenericAPIView):
 
     """ 
     get: 
-        return a list of all active erros 
+        return a list of all active errors 
         
     filters: 
         SearchFilter => fields: 'sources', 'level'
@@ -34,7 +61,7 @@ class ListErrors(mixins.ListModelMixin,
     """
 
     permission_classes = (IsAuthenticated,)
-    queryset = models.Errors.objects.filter(is_active=True)
+    queryset = models.Error.objects.filter(is_active=True)
     serializer_class = serializers.ErrorsSerializer
 
     filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
@@ -65,7 +92,7 @@ class createError(mixins.CreateModelMixin,
         user, is_active and date are hidden'''
     
     permission_classes = (IsAuthenticated,)
-    queryset = models.Errors.objects.all()
+    queryset = models.Error.objects.all()
     serializer_class = serializers.ErrorsCreateSerializer
     
     def post(self, request, *args, **kwargs):
@@ -85,11 +112,5 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
     destroy object
     """
     permission_classes = (IsAuthenticated,)
-    queryset = models.Errors.objects.all()
+    queryset = models.Error.objects.all()
     serializer_class = serializers.ErrorsDetailSerializer
-
-    
-
-    
-
-
