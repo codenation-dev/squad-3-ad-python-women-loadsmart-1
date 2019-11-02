@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+#import django_heroku
+from datetime import timedelta
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +29,7 @@ SECRET_KEY = '%c_$%9jo(8fphl+86(zd%_tpe_%9itr*49!xb(evhn!7ndq+wb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+
 
 
 # Application definition
@@ -38,13 +42,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites', # modified
-    'rest_framework',
-    'rest_framework.authtoken',
-    'rest_auth',
     'rest_auth.registration',
+    'django_filters',
+    'rest_framework',
     'corsheaders',
-    'core',
     'user',
+    'core',
+    'rest_framework_swagger',    
+    
 
 ]
 
@@ -66,7 +71,11 @@ MIDDLEWARE = [
 #https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 #allow different origin acess all endpoint 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = True #only in develop 
+                            #the whitelist will not be used
+                            # and all origins will be accepted. Defaults to False.
+
+# ALLOWED_HOSTS = ['localhost','127.0.0.1' '.herokuapp.com']
 
 ROOT_URLCONF = 'project.urls'
 
@@ -86,7 +95,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project.wsgi.application'
 
 
 # Database
@@ -105,13 +113,12 @@ DATABASES = {
     'default': {
         'ENGINE': os.environ.get('APP_DB_ENGINE', 'django.db.backends.postgresql'),
         'HOST': os.environ.get('DB_HOST','127.0.0.1'),
-        'NAME': os.environ.get('DB_NAME', 'mydb'),    
+        'NAME': os.environ.get('DB_NAME', 'central'),    
         'USER': os.environ.get('DB_USER','postgres'),
         'PASSWORD': os.environ.get('DB_PASSWORD','secret'),
         'BYPASS_CREATION':'yes',
     }
 }
-
 '''
 
 # Password validation
@@ -134,23 +141,59 @@ AUTH_PASSWORD_VALIDATORS = [
 # Modified 
 REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'user.serializers.CustomLoginSerializer',
+    'USER_DETAILS_SERIALIZER':'user.serializers.CustomUserDetailsSerializer',
+    'TOKEN_SERIALIZER': 'rest_auth.serializers.TokenSerializer',
+
 }
 
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:3000',
+)
 
 # Modified
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=365),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=365),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    #'SIGNING_KEY': settings.SECRET_KEY,
+    'VERIFYING_KEY': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'JTI_CLAIM': 'jti',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
+}
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTH_USER_MODEL = 'core.User'
 
 REST_FRAMEWORK = {
-    'PAGE_SIZE': 10,
-    'DEFAULT_PAGINATION_CLASS':
-    'rest_framework.pagination.PageNumberPagination',
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,    
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-        
-    ]
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',), 
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' # to swagger documentation UI
 }
 
 
@@ -173,5 +216,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Deploy heroku
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
 SITE_ID=1
 
+#django_heroku.settings(locals())

@@ -4,8 +4,8 @@
 In this project is a aplication to register error logs.
 
 The project architecture consists of:
-- Backfull Restfull API
-- Front End
+- Backend Restfull API
+- Front End (React)
 
 ## Requirements
 
@@ -27,10 +27,12 @@ We recommend use a virtual env:
     python manage.py runserver
 
 
-
 ## Documentation 
 
-http://127.0.0.1:8000/doc/
+http://127.0.0.1:8000/doc/ 
+(UI documentation using swagger - must be loged to acess the complete documentation)
+
+http://127.0.0.1:8000/openapi
 
 Acess http://editor.swagger.io/ and past the content.
 

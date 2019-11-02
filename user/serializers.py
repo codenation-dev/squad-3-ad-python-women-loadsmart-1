@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import serializers
-
+from core.models import User
 
 class UserSerializer(serializers.ModelSerializer):
     '''Customized User serializer model in core.model'''
@@ -33,6 +33,8 @@ class CustomLoginSerializer(serializers.Serializer):
 
     # Need modify REST_AUTH_SERIALIZERS 'LOGIN_SERIALIZER': 
     # https://github.com/Tivix/django-rest-auth/blob/master/rest_auth/serializers.py
+    
+    name = 'name' # fix bug send this on post request, is not required field
     email = serializers.EmailField(required=False, allow_blank=True)
     password = serializers.CharField(style={'input_type': 'password'})
 
@@ -47,11 +49,20 @@ class CustomLoginSerializer(serializers.Serializer):
             password=password
         )
         if not user:
-            msg = _('Unable to authenticate with provided credentials')
+            msg =_('Unable to authenticate with provided credentials')
             raise serializers.ValidationError(msg, code='authentication')
 
         attrs['user'] = user
         return attrs
+
+
+class CustomUserDetailsSerializer(serializers.ModelSerializer):
+    '''Customized User detail model in core.model instead to username use email'''
+
+
+    class Meta:
+        model = User
+        fields = '__all__'
 
 
   
