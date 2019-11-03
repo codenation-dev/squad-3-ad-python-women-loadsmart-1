@@ -103,10 +103,6 @@ class Error(models.Model):
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
 
     
-
-
     def __str__(self):
         """A string representation of the model."""
         return self.title
-
-

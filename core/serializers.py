@@ -10,11 +10,15 @@ class AgentSerializer(serializers.ModelSerializer):
     ''' Serializer for Agent objetcs'''
     # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
+    user = serializers.SlugRelatedField(
+            read_only=True,
+            slug_field='name'
+    )
+
     class Meta:
         model = models.Agent
         fields = '__all__'
-        read_only_fields = ('id',)
-
+        read_only_fields = ('id','user')
 
 
 class AgentCreateSerializer(serializers.ModelSerializer):
@@ -33,15 +37,18 @@ class AgentCreateSerializer(serializers.ModelSerializer):
 
         )
         
-
-
-
-
 class ErrorsSerializer(serializers.ModelSerializer):
     '''return a basic information about the error whitout details'''
+
+    user = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='name'
+    )
+
     class Meta:
         fields = (
             'id',
+            'user',
             'sources',
             'title',
             'log',
@@ -88,4 +95,19 @@ class ErrorsDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Error
         fields = '__all__'
-        read_only_fields = ('user','created','log')        
+        read_only_fields = ('user','created','log')
+
+class FilterSerializer(serializers.ModelSerializer):
+    '''Return all the fields from a especific error
+    for update some fields are declared as read only'''
+    
+
+     # show name instead of the related pk id
+    class Meta:
+        model = models.Error
+        fields = (
+            'env',
+            'level',
+        )
+
+

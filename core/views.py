@@ -15,15 +15,51 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 
 
-class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
-    '''Get : all Agents by user 
-        Post : create a new Agent
+class ListAgentAll(mixins.ListModelMixin, generics.GenericAPIView):
+    '''Get : all Agents  
     '''
     permission_classes = (IsAuthenticated,)
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentSerializer
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
+class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
+    '''Get : return all Agents for currently user
+    '''
+
+    permission_classes = (IsAuthenticated,)
+    serializer_class = serializers.AgentSerializer
+
+
+    def get_queryset(self):
+        """
+        This view should return a list of all the agents
+        for the currently authenticated user.
+        """
+        user_current = self.request.user
+        return models.Agent.objects.filter(user=user_current)
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+
+
+class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
+
+    """
+    get:
+    Return all the fields from a especific error
+
+    put:
+    partial update some fields are declared as read only
+
+    delete: 
+    destroy object
+    """
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Agent.objects.all()
+    serializer_class = serializers.AgentSerializer
 
 
 
@@ -94,6 +130,7 @@ class createError(mixins.CreateModelMixin,
     permission_classes = (IsAuthenticated,)
     queryset = models.Error.objects.all()
     serializer_class = serializers.ErrorsCreateSerializer
+
     
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
