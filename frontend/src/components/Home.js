@@ -7,18 +7,19 @@ import { withRouter } from 'react-router-dom';
 
 class Home extends Component {
 
-
-
     render() {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <>
             <p>Usuário autenticado</p>
+            <button  onClick={e => {
+                    this.showModal();
+                }}> Create Agent </button>
             </>
         )
       const guestLinks = (
         <>
-        <p>Usuário autenticado</p>
+        <p>Visitante não autenticado</p>
         </>
       )
         return(

@@ -14,6 +14,28 @@ export const registerUser = (user, history) => dispatch => {
             });
 }
 
+export const createAgent = (agent) => dispatch => {
+    axios.post('http://127.0.0.1:8000/api/agent/create/', agent)
+            .then(res => console.log(res))
+            .catch(err => {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
+}
+
+
+export const createError = (errorObj) => dispatch => {
+    axios.post('http://127.0.0.1:8000/api/central/create/', errorObj)
+            .then(res => console.log(res))
+            .catch(err => {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
+}
 
 export const loginUser = (user) => dispatch => {
     axios.post('http://127.0.0.1:8000/api/token/', user)

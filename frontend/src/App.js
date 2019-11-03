@@ -10,6 +10,9 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import AgentCreate from './components/AgentCreate';
+import ErrorCreate from './components/ErrorCreate';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -36,6 +39,8 @@ class App extends Component {
                 <div className="container">
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
+                  <Route exact path="/agent/create" component={ AgentCreate } />
+                  <Route exact path="/error/create" component={ ErrorCreate } />
                 </div>
             </div>
           </Router>
