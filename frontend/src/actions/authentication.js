@@ -27,6 +27,7 @@ export const createAgent = (agent) => dispatch => {
 
 
 export const createError = (errorObj) => dispatch => {
+   
     axios.post('http://127.0.0.1:8000/api/central/create/', errorObj)
             .then(res => console.log(res))
             .catch(err => {
@@ -63,6 +64,7 @@ export const setCurrentUser = decoded => {
     }
 }
 
+
 export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
@@ -79,3 +81,5 @@ export const listCentral = (history) => dispatch => {
         console.log(error);
     })
 }
+
+export const getToken = () => localStorage.getItem('jwtToken');

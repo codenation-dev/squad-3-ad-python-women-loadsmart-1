@@ -13,7 +13,7 @@ class Home extends Component {
         const authLinks = (
             <>
             <p>Usuário autenticado</p>
-            <button  onClick={e => {
+            <button className="btn btn-primary" onClick={e => {
                     this.showModal();
                 }}> Create Agent </button>
 
@@ -41,6 +41,7 @@ Home.propTypes = {
 
 const mapStateToProps = (state) => ({
     auth: state.auth
+  
 })
 
 export default connect(mapStateToProps, { logoutUser })(withRouter(Home));

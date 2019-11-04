@@ -1,59 +1,60 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import TableRow from './TableRow';
 
-const Register = props => (
-    <tr>
-        <td>{props.register.id}</td>
-        <td>{props.register.level}</td>
-        <td>{props.register.env}</td>
-        <td>
-            <Link to={"/edit/"+props.register.id}>Edit</Link>
-        </td>
-    </tr>
-)
+export default class Index extends Component {
 
-export default class RegisterList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {registers: []};
+  constructor(props) {
+      super(props);
+      this.state = {
+          register: [], 
+          count: 0,
+          next: null,
+          previous: null,
+    
+        };
     }
+    componentDidMount(){
+      axios.get('http://localhost:8000/api/central/')
+        .then(response => {
+          this.setState({ register: response.data.results });
+          this.setState({ count: response.data.count });
+          this.setState({ next: response.data.next });
+          this.setState({ previous: response.data.previous });
+          console.log(response.data)
+          console.log('oi');
 
-    componentDidMount() {
-        axios.get('http://localhost:8000/api/central/')
-            .then(response => {
-                this.setState({ registers: response.data['results'] });
-            })
-            .catch(function (error){
-                console.log(error);
-            })
-    }
-
-    registerList() {
-        return this.state.registers.map(function(currentRegister, i){
-            return <Register register={currentRegister} key={i} />;
         })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+    tabRow(){
+
+      return this.state.register.map(function(object, i){
+          return <TableRow obj={object} key={i} />;
+      });
     }
 
     render() {
-        return (
-            <div>
-                <h3>Todos List</h3>
-                <table className="table table-striped" style={{ marginTop: 20 }} >
-                    <thead>
-                        <tr>
-                            <th>Description</th>
-                            <th>Responsible</th>
-                            <th>Priority</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <body>
-                        { this.registerList() }
-                    </body>
-                </table>
-            </div>
-        )
+      return (
+        <div>
+          <h3 align="center"> Central de Erros</h3>
+          <table className="table table-striped" style={{ marginTop: 20 }}>
+            <thead>
+              <tr>
+                <th>Level</th>
+                <th>Log</th>
+                <th>Source</th>
+                <th>Events</th>
+                <th colSpan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              { this.tabRow() }
+            </tbody>
+          </table>
+        </div>
+      );
     }
-}
+  }
