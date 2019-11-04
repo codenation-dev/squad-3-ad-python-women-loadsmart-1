@@ -69,3 +69,13 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
     history.push('/login');
 }
+
+export const listCentral = (history) => dispatch => {
+    axios.get('http://localhost:8000/api/central/')
+    .then(response => {
+        this.setState({ registers: response.data['results'] });
+    })
+    .catch(function (error){
+        console.log(error);
+    })
+}

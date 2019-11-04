@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 export default class Home extends Component {
     render() {
 
-         const {isAuthenticated, user} = this.props.auth;
-        const authLinks = (
+    const {isAuthenticated, user} = this.props.auth;
+       const authLinks = (
             <ul className="navbar-nav ml-auto">
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt={user.name} title={user.name}

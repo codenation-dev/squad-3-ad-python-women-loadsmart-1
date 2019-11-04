@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
+import  RegisterList from './RegisterList'
 
 class Home extends Component {
 
@@ -15,6 +16,8 @@ class Home extends Component {
             <button  onClick={e => {
                     this.showModal();
                 }}> Create Agent </button>
+
+            <RegisterList/>
             </>
         )
       const guestLinks = (
