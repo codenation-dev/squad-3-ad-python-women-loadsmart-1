@@ -88,4 +88,18 @@ class ErrorsDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Error
         fields = '__all__'
-        read_only_fields = ('user','created','log')        
+        read_only_fields = ('user','created','log') 
+
+class CountingSerializer(serializers.ModelSerializer):
+    agent = serializers.SlugRelatedField(
+        queryset=Agent.objects.all(),
+        slug_field='id'
+     )
+
+    class Meta:
+        fields = (
+                    'level',   
+                    'agent'
+         
+            )
+        model = models.Error

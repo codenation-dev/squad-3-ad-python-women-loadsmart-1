@@ -7,12 +7,12 @@ from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework import filters
 from django_filters import rest_framework as filtersfield
-
-
+from django.db.models import Count
 from core import models
 from core import serializers
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import viewsets
 
 
 class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
@@ -114,3 +114,23 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = models.Error.objects.all()
     serializer_class = serializers.ErrorsDetailSerializer
+
+
+
+
+class ErrorOcurrencesCountView(mixins.ListModelMixin, generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Error.objects.all()
+    filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
+    ordering = ['agent','level']
+    
+
+    '''
+    queryset = models.Error.objects.annotate(Count('agent'))
+    #queryset = models.Error.objects.values('agent', 'level').order_by('agent').annotate(Count('level'))
+   '''
+    serializer_class = serializers.CountingSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+
