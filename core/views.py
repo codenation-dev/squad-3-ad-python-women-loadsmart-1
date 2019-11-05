@@ -116,6 +116,7 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.ErrorsDetailSerializer
 
 
+<<<<<<< HEAD
 class ErrorOcurrencesCountView(generics.RetrieveAPIView):
     permission_classes = (IsAuthenticated,)
   
@@ -128,4 +129,23 @@ class ErrorOcurrencesCountView(generics.RetrieveAPIView):
   
     serializer_class = serializers.CountingSerializer
 
+=======
+
+
+class ErrorOcurrencesCountView(mixins.ListModelMixin, generics.GenericAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = models.Error.objects.all()
+    filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
+    ordering = ['agent','level']
+    
+
+    '''
+    queryset = models.Error.objects.annotate(Count('agent'))
+    #queryset = models.Error.objects.values('agent', 'level').order_by('agent').annotate(Count('level'))
+   '''
+    serializer_class = serializers.CountingSerializer
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+    
+>>>>>>> error-counting
 
