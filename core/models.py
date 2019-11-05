@@ -4,8 +4,8 @@ from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
                                         PermissionsMixin
 from django.core.validators import validate_ipv4_address
-
-
+from django.db.models import Count
+from django.http import JsonResponse
 
 class UserManager(BaseUserManager):
 
@@ -60,6 +60,8 @@ class Agent(models.Model):
 
     class Meta:
         ordering = ['name']
+
+        
 class Error(models.Model):
     """Model representation Title, log, description, 
     level, source, active(flag), foreingkey(user)."""
@@ -101,8 +103,11 @@ class Error(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField (default= timezone.now)
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
+    @property
+    def error_counting(Error):
 
-    
+        q = Error.objects.annotate(agent_count=Count(self.agent))
+        return q
 
 
     def __str__(self):
