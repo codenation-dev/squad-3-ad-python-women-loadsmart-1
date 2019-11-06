@@ -104,10 +104,10 @@ class Error(models.Model):
     created = models.DateTimeField (default= timezone.now)
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
     @property
-    def error_counting(Error):
+    def error_counting(self):
 
-        q = Error.objects.annotate(agent_count=Count(self.agent))
-        return q
+        q = Error.objects.filter(agent=self.agent, level=self.level)
+        return len(q)
 
 
     def __str__(self):

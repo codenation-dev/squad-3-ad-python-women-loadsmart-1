@@ -101,6 +101,6 @@ class CountingSerializer(serializers.ModelSerializer):
                 'id',
                 'level',
                 'agent',
-                'error_counting'
+                'error_counting',
             )
         model = models.Error
