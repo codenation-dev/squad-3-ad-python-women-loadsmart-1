@@ -51,9 +51,9 @@ class Agent(models.Model):
     name = models.CharField(max_length=50)
     user = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
     address = models.GenericIPAddressField(validators=[validate_ipv4_address], null=True)
-    status = models.BooleanField(default=False)
-    env = models.CharField(max_length=20)
-    version = models.CharField(max_length=5)
+    status = models.BooleanField(default=True)
+    env = models.CharField(max_length=50)
+    version = models.CharField(max_length=20)
 
     def __str__(self):
         return self.name
