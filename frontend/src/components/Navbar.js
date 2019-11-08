@@ -15,7 +15,10 @@ class Navbar extends Component {
     render() {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
+            <>
+            <ul>Bem-vind@ Username</ul>
             <ul className="navbar-nav ml-auto">
+               
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt={user.name} title={user.name}
                         className="rounded-circle"
@@ -23,6 +26,7 @@ class Navbar extends Component {
                             Logout
                 </a>
             </ul>
+            </>
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">

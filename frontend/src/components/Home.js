@@ -12,7 +12,6 @@ class Home extends Component {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <>
-            <p>Usuário autenticado</p>
             <button className="btn btn-primary" onClick={e => {
                     this.showModal();
                 }}> Create Agent </button>
