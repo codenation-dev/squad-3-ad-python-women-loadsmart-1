@@ -2,6 +2,9 @@ import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './types';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
+import LocalStorageService from '../services/storage/LocalStorageService';
+
+const localStorageService = LocalStorageService;
 
 export const registerUser = (user, history) => dispatch => {
     axios.post('http://127.0.0.1:8000/users/register/', user)
@@ -43,8 +46,11 @@ export const loginUser = (user) => dispatch => {
             .then(res => {
                 const { token } = res.data;
                 //console.log(res.data)
+                localStorageService.setToken(res.data)
+               
+
                 var jwtacess = res.data['access']
-                localStorage.setItem('jwtToken', jwtacess);
+                localStorage.setItem('jwtToken', jwtacess);  // need change to use only acess 
                 setAuthToken(jwtacess);
                 const decoded = jwt_decode(jwtacess);
                 dispatch(setCurrentUser(decoded));
@@ -66,7 +72,7 @@ export const setCurrentUser = decoded => {
 
 
 export const logoutUser = (history) => dispatch => {
-    localStorage.removeItem('jwtToken');
+    localStorageService.clearToken();
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     history.push('/login');
