@@ -100,13 +100,16 @@ class ListError(mixins.ListModelMixin,
     queryset = models.Error.objects.filter(is_active=True)
     serializer_class = serializers.ErrorsSerializer
 
-    filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
+    filter_backends = [
+        filters.SearchFilter,
+        filters.OrderingFilter, 
+        filtersfield.DjangoFilterBackend,
+        ]
 
     search_fields = ['title', 'description']
     filterset_fields = ['sources', 'level']
     ordering_fields = ['sources', 'level','created']
     ordering = ['created'] #default order
-
 
 
     
@@ -154,15 +157,12 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ErrorOcurrencesCountView(generics.RetrieveAPIView):
+    """ Return the numbers of events that have the same 
+    level and agent """
+  
     permission_classes = (IsAuthenticated,)
-  
     queryset= models.Error.objects.all()
-
-    #queryset = models.Error.objects.all()
-    #filter_backends = [filters.SearchFilter,filters.OrderingFilter, filtersfield.DjangoFilterBackend,]
-    #ordering = ['agent','level']
-    
-  
+      
     serializer_class = serializers.CountingSerializer
 
 

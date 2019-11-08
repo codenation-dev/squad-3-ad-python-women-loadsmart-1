@@ -15,7 +15,7 @@ class TableRow extends Component {
             {this.props.obj.sources}
           </td>
           <td>
-            00
+          {this.props.obj.error_counting}
           </td>
           <td>
             <button className="btn btn-primary">Edit</button>

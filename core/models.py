@@ -103,10 +103,15 @@ class Error(models.Model):
     is_active = models.BooleanField(default=True)
     created = models.DateTimeField (default= timezone.now)
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
+
     @property
     def error_counting(self):
         q = Error.objects.filter(agent=self.agent, level=self.level)
         return len(q)
+        
+    @property
+    def agent_address(self):
+        return Agent.objects.filter(agent=self.agent)
 
 
     def __str__(self):

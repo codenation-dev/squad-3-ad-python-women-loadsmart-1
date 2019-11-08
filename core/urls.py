@@ -11,6 +11,5 @@ urlpatterns = [
     path('agent/all/',views.ListAgentAll.as_view()),
     path('central/counting/<int:pk>',views.ErrorOcurrencesCountView.as_view()) 
 
-
     #The DRF provide  endpoints for the users (login/logout/token/etc)
 ]
