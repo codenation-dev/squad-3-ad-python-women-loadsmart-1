@@ -1,28 +1,23 @@
 
-from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import mixins
-from rest_framework.response import Response
-from rest_framework.views import APIView
-from rest_framework import status
 from rest_framework import filters
 from django_filters import rest_framework as filtersfield
-from django.db.models import Count
 from core import models
 from core import serializers
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from rest_framework import viewsets
 
 
 class ListAgentAll(mixins.ListModelMixin, generics.GenericAPIView):
-    '''Get : all Agents  
+    '''Get : all Agents
     '''
     permission_classes = (IsAuthenticated,)
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentSerializer
+    
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
+
 
 class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
     '''Get : return all Agents for currently user
@@ -30,7 +25,6 @@ class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
 
     permission_classes = (IsAuthenticated,)
     serializer_class = serializers.AgentSerializer
-
 
     def get_queryset(self):
         """
@@ -42,10 +36,10 @@ class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-    
 
 
 class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
+
 
     """
     get:
@@ -61,35 +55,30 @@ class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentSerializer
 
-
-
-
 class CreateAgent(mixins.CreateModelMixin,
                  generics.GenericAPIView):
 
-    ''' 
-    post:
+    ''' post:
         This allow client insert a new Agent  
         user = is_active'''
-    
+
     permission_classes = (IsAuthenticated,)
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentCreateSerializer
-    
+
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
 class ListError(mixins.ListModelMixin,
                  generics.GenericAPIView):
 
-    """ 
-    get: 
+    """ get: 
         return a list of all active errors 
-        
+
     filters: 
         SearchFilter => fields: 'sources', 'level'
         FilterSet => 'title', 'description' (using crysping forms)
-   
+    
     examples:
          /?sources=TESTING&level=WARNING
          /?search=keyword+anotherword
@@ -122,19 +111,19 @@ class ListError(mixins.ListModelMixin,
         return self.list(request, *args, **kwargs)
     
 
-class createError(mixins.CreateModelMixin,
-                 generics.GenericAPIView):
+class createError(
+    mixins.CreateModelMixin,
+    generics.GenericAPIView):
 
     ''' 
     post:
         This allow client insert a new error data 
         user, is_active and date are hidden'''
-    
+
     permission_classes = (IsAuthenticated,)
     queryset = models.Error.objects.all()
     serializer_class = serializers.ErrorsCreateSerializer
 
-    
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
@@ -148,7 +137,7 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
     put:
     partial update some fields are declared as read only
 
-    delete: 
+    delete:
     destroy object
     """
     permission_classes = (IsAuthenticated,)
@@ -159,10 +148,7 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 class ErrorOcurrencesCountView(generics.RetrieveAPIView):
     """ Return the numbers of events that have the same 
     level and agent """
-  
+
     permission_classes = (IsAuthenticated,)
-    queryset= models.Error.objects.all()
-      
+    queryset = models.Error.objects.all()
     serializer_class = serializers.CountingSerializer
-
-

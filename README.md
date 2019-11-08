@@ -26,6 +26,25 @@ We recommend use a virtual env:
     python manage.py migrate
     python manage.py runserver
 
+open : http://localhost:8000/
+
+
+    
+
+## Provide inicial data
+
+./manage.py loaddata db.json
+
+## Front-End 
+You must have node
+
+To run:
+    cd frontend
+    npm install
+    npm start
+
+open : http://localhost:3000/
+
 
 ## Documentation 
 
