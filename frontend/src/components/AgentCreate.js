@@ -64,7 +64,6 @@ class AgentCreate extends Component {
 
         const authLinks = (
             <>
-            <p>Usuário autenticado</p>
             
 
             <div className="container" style={{ marginTop: '50px', width: '700px'}}>

@@ -12,6 +12,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import AgentCreate from './components/AgentCreate';
 import ErrorCreate from './components/ErrorCreate';
+import ProtectRoute from './components/ProtectRoute';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -29,25 +30,30 @@ if(localStorage.access) {
 }
 
 class App extends Component {
+
+  
   render() {
+    
     return (
       <Provider store = { store }>
-        <Router>
-            <div>
-              <Navbar />
-                <Route exact path="/" component={ Home } />
-                <div className="container">
-                  <Route exact path="/register" component={ Register } />
-                  <Route exact path="/login" component={ Login } />
-                
-                  <Route exact path="/agent/create" component={ AgentCreate } />
-                  <Route exact path="/error/create" component={ ErrorCreate } />
-                </div>
-            </div>
-          </Router>
-        </Provider>
+      <Router>
+          <div>
+            <Navbar />
+              <Route exact path="/" component={ Home } />
+              <div className="container">
+                <Route exact path="/register" component={ Register } />
+                <Route exact path="/login" component={ Login } />
+              
+                <ProtectRoute exact path="/agent/create" component={ AgentCreate } />
+                <ProtectRoute exact path="/error/create" component={ ErrorCreate } />
+              </div>
+          </div>
+        </Router>
+      </Provider>
     );
   }
+  
 }
+
 
 export default App;

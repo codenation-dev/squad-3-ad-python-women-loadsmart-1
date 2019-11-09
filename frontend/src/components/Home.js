@@ -7,7 +7,6 @@ import { withRouter } from 'react-router-dom';
 import  CentralList from './CentralList'
 
 
-var data = '?sources=DEVELOPMENT&level=';
 
 class Home extends Component {
     constructor() {
@@ -26,26 +25,36 @@ class Home extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+
+
+        if (this)
+
         this.setState({
-            query: this.state.source+this.state.level,
+            query: this.state.source+this.state.level,            
             press: true,
         });
-        console.log('press button')     
+        console.log('press button')
     }
+
 
     handleInputChange(e) {
-        
         this.setState({
             [e.target.name]: e.target.value,
-        })
+            press: false,
+        }) 
+     
     }
 
+
+
     render() {
-        const {isAuthenticated, } = this.props.auth;
-        const btnPress = ( <CentralList search = {this.state.query}/> 
-            )
+        const {isAuthenticated } = this.props.auth;
+        const btnPress = (
+             <>                    
+                    <CentralList search = {this.state.query}/> 
+            </> )
         
-        const btnNotPress = (<p></p>)
+        const btnNotPress = (<p>Pesquisando....clique no botão search para nova pesquisa</p>)
         const authLinks = (
             <>
             <br></br>
@@ -59,7 +68,6 @@ class Home extends Component {
                     id="sourceSelect" name="source" 
                     onChange={ this.handleInputChange }
                     value={this.state.value}>
-                        <option > Source</option>
                         <option value="?sources=PRODUCTION">Production</option>
                         <option value="?sources=TESTING">Testing</option>
                         <option value="?sources=DEVELOPMENT">Development</option>
@@ -77,33 +85,27 @@ class Home extends Component {
                         value={this.state.value}
 
                     >
-                        <option value=''>Level</option>
-                        <option value="" 
-                           value="&level=ERROR" 
-                           name="level" >
-                            Error</option>
-                        <option value="&level=WARNING" 
-                          
-                            name="level">
-                            Warning</option>
+                        <option value='&level='>Level</option>
+                        <option value="&level=ERROR">  Error</option>
+                        <option value="&level=WARNING">  Warning</option>
 
-                        <option value="&level=DEBUG"
-                            name="level">
-                            Debug</option>
+                        <option value="&level=DEBUG"> Debug</option>
                     </select>
                     </div>
                     <div class="col">
 
-                    <select class="custom-select" id="orderSelect" name="order">
-                        <option value="1" onChange={ this.handleInputChange }>Order default</option>
-                        <option value="2" onChange={ this.handleInputChange }>Level</option>
-                        <option value="3" onChange={ this.handleInputChange }>Frequência</option>
+                    <select class="custom-select" id="orderSelect" name="order" onChange={  this.handleInputChange }>
+                        <option value="1" >Order default</option>
+                        <option value="2" >Level</option>
+                        <option value="3" >Frequência</option>
                     </select>
                     </div>
                     <div class="col-5">
                         <input type="text" class="form-control" placeholder="search"/>
                     </div>
                         <button type="submit"  className="btn btn-primary " onClick={e => {
+                                  
+
                            }}> SEARCH
                         </button>
                  </div>
@@ -121,11 +123,14 @@ class Home extends Component {
         </>
       )
         return(
-            
+                    <>
+          
                 <section className="container" id="welcome">
                     {isAuthenticated ? authLinks : guestLinks}
+
+
                 </section>
-          
+            </>
         )
     }
 }

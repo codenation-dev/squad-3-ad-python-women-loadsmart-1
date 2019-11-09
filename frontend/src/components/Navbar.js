@@ -6,9 +6,6 @@ import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 
 
-if(localStorage.access) {
-    
-}
 class Navbar extends Component {
 
     onLogout(e) {
@@ -77,6 +74,7 @@ Navbar.propTypes = {
 
 const mapStateToProps = (state) => ({
     auth: state.auth
+    
 })
 
 export default connect(mapStateToProps, { logoutUser })(withRouter(Navbar));
