@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
-                                        PermissionsMixin
+    PermissionsMixin
 from django.core.validators import validate_ipv4_address
+
 
 class UserManager(BaseUserManager):
 
@@ -43,11 +44,12 @@ class User(AbstractBaseUser, PermissionsMixin):
         password = validated_data.pop('password', None)
         user = super().update(instance, validated_data)
 
+
 class Agent(models.Model):
     name = models.CharField(max_length=50)
     user = models.ForeignKey(
-        User, 
-        on_delete=models.PROTECT, 
+        User,
+        on_delete=models.PROTECT,
         null=True
     )
     address = models.GenericIPAddressField(
@@ -64,9 +66,9 @@ class Agent(models.Model):
     class Meta:
         ordering = ['name']
 
-        
+
 class Error(models.Model):
-    """Model representation Title, log, description, 
+    """Model representation Title, log, description,
     level, source, active(flag), foreingkey(user)."""
 
     ERROR = 'ERROR'
@@ -77,7 +79,7 @@ class Error(models.Model):
         (DEBUG, ('DEBUG')),
         (WARNING, ('WARNING')),
     ]
-    
+
     DEVELOPMENT = 'DEVELOPMENT'
     TESTING = 'TESTING'
     PRODUCTION = 'PRODUCTION'
@@ -108,7 +110,7 @@ class Error(models.Model):
     )
 
     is_active = models.BooleanField(default=True)
-    created = models.DateTimeField (default= timezone.now)
+    created = models.DateTimeField(default=timezone.now)
     agent = models.ForeignKey(Agent, on_delete=models.PROTECT)
 
     @property
@@ -119,7 +121,6 @@ class Error(models.Model):
     @property
     def agent_address(self):
         return Agent.objects.filter(agent=self.agent)
-
 
     def __str__(self):
         """A string representation of the model."""
