@@ -1,5 +1,6 @@
-
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import ErrorDetail from './ErrorDetail';
 
 class TableRow extends Component {
   render() {
@@ -19,7 +20,11 @@ class TableRow extends Component {
           {this.props.obj.error_counting}
           </td>
           <td>
-            <button className="btn btn-outline-primary ">Details</button>
+            <Link to={`/${this.props.obj.id}`}>
+                <button className="btn btn-outline-primary ">Details
+                </button>
+            </Link>
+            
           </td>
           <td>
             <button className="btn btn-outline-danger ">Delete</button>

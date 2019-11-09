@@ -28,6 +28,7 @@ class Navbar extends Component {
                         Create Agent
                   </Link>
             </ul>
+
             <ul className="navbar-nav ml-auto">
                
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
