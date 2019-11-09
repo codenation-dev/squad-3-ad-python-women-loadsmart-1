@@ -17,10 +17,14 @@ export default class Home extends Component {
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link className="nav-link" to="/register">Sign Up</Link>
+                <Link className="nav-link" to="/register">
+                    <button className="btn btn-dark btn-lg">REGISTER</button>
+                </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login">Sign In</Link>
+                <Link className="nav-link" to="/login">
+                <button className="btn btn-outline-dark btn-lg">LOGIN</button>
+                </Link>
             </li>
         </ul>
       )

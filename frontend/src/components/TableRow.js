@@ -18,10 +18,10 @@ class TableRow extends Component {
           {this.props.obj.error_counting}
           </td>
           <td>
-            <button className="btn btn-primary">Edit</button>
+            <button className="btn btn-dark ">Edit</button>
           </td>
           <td>
-            <button className="btn btn-danger">Delete</button>
+            <button className="btn btn-danger ">Delete</button>
           </td>
         </tr>
     );

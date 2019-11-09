@@ -123,7 +123,7 @@ class AgentCreate extends Component {
                     {errors.version && (<div className="invalid-feedback">{errors.version}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-dark">
                         Create
                     </button>
                 </div>

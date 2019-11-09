@@ -5,12 +5,18 @@ import { connect } from 'react-redux';
 import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 
+
+if(localStorage.access) {
+    
+}
 class Navbar extends Component {
 
     onLogout(e) {
         e.preventDefault();
         this.props.logoutUser(this.props.history);
     }
+
+   
 
     render() {
         const {isAuthenticated, user} = this.props.auth;
@@ -23,18 +29,28 @@ class Navbar extends Component {
                     <img src={user.avatar} alt={user.name} title={user.name}
                         className="rounded-circle"
                         style={{ width: '25px', marginRight: '5px'}} />
-                            Logout
+                           <button type="submit"  className="btn btn-outline-dark">
+                           Logout
+                         </button> 
                 </a>
             </ul>
             </>
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
+     
             <li className="nav-item">
-                <Link className="nav-link" to="/register">Sign Up</Link>
+                <Link className="nav-link" to="/login">
+                    <button  className="btn btn-outline-dark">
+                        Login
+                    </button>
+                </Link>
             </li>
             <li className="nav-item">
-                <Link className="nav-link" to="/login">Sign In</Link>
+                <Link className="nav-link" to="/register">
+                    <button  className="btn btn-dark">Sign Up
+                    </button>
+                </Link>
             </li>
         </ul>
       )

@@ -5,9 +5,10 @@ import jwt_decode from 'jwt-decode';
 import LocalStorageService from '../services/storage/LocalStorageService';
 
 const localStorageService = LocalStorageService;
+const URL = 'http://127.0.0.1:8000'
 
 export const registerUser = (user, history) => dispatch => {
-    axios.post('http://127.0.0.1:8000/users/register/', user)
+    axios.post(URL+'/users/register/', user)
             .then(res => history.push('/login'))
             .catch(err => {
                 dispatch({
@@ -17,8 +18,10 @@ export const registerUser = (user, history) => dispatch => {
             });
 }
 
+
+
 export const createAgent = (agent) => dispatch => {
-    axios.post('http://127.0.0.1:8000/api/agent/create/', agent)
+    axios.post(URL+'/api/agent/create/', agent)
             .then(res => console.log(res))
             .catch(err => {
                 dispatch({
@@ -31,7 +34,7 @@ export const createAgent = (agent) => dispatch => {
 
 export const createError = (errorObj) => dispatch => {
    
-    axios.post('http://127.0.0.1:8000/api/central/create/', errorObj)
+    axios.post(URL+'/api/central/create/', errorObj)
             .then(res => console.log(res))
             .catch(err => {
                 dispatch({
@@ -42,7 +45,7 @@ export const createError = (errorObj) => dispatch => {
 }
 
 export const loginUser = (user) => dispatch => {
-    axios.post('http://127.0.0.1:8000/api/token/', user)
+    axios.post(URL+'/api/token/', user)
             .then(res => {
                 const { token } = res.data;
                 //console.log(res.data)
@@ -78,14 +81,17 @@ export const logoutUser = (history) => dispatch => {
     history.push('/login');
 }
 
-export const listCentral = (history) => dispatch => {
-    axios.get('http://localhost:8000/api/central/')
+
+export const aboutMe = (history) => dispatch => {
+    axios.get(URL+'/users/me/')
     .then(response => {
-        this.setState({ registers: response.data['results'] });
+        this.setState({ registers: response.data });
     })
     .catch(function (error){
         console.log(error);
     })
 }
 
-export const getToken = () => localStorage.getItem('jwtToken');
+
+
+export const getToken = () => localStorage.getItem('access');

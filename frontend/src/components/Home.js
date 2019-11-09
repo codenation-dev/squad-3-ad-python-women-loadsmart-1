@@ -6,22 +6,75 @@ import { logoutUser } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import  RegisterList from './RegisterList'
 
+
+var data = '?sources=DEVELOPMENT&level=';
+
 class Home extends Component {
+    constructor() {
+        super();
+        this.state = {
+            username: '',
+            sources_list: {},
+            level_list: {},
+            query:'',
+            press:false,
+        }
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+        this.setState({
+            query:'?sources=DEVELOPMENT&level=',
+            press: true,
+        });
+
+        console.log('press button')
+        
+    }
 
     render() {
-        const {isAuthenticated, user} = this.props.auth;
+        const {isAuthenticated, } = this.props.auth;
+        const btnPress = ( <RegisterList search = {this.state.query}/> 
+            )
+        
+        const btnNotPress = (<p></p>)
         const authLinks = (
             <>
-            <button className="btn btn-primary" onClick={e => {
-                    this.showModal();
-                }}> Create Agent </button>
+            <br></br>
+            <h1 align="center"> Central de Erros</h1>
+            
+                <form onSubmit={ this.handleSubmit }>
+                <div class="form-row">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="City"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="State"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Zip"/>
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="search"/>
+                    </div>
 
-            <RegisterList/>
+                        <button type="submit"  className="btn btn-dark " onClick={e => {
+                           }}> SEARCH
+                        </button>
+                 </div>
+                </form>
+           
+        
+            <div className="container">
+                    {this.state.press ? btnPress : btnNotPress}
+            </div>
+            
             </>
         )
       const guestLinks = (
         <>
-        <p>Visitante não autenticado</p>
+        <p>Central de erros. Boas-vindas, usuário não autenticado.</p>
         </>
       )
         return(
