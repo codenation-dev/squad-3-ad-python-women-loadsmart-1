@@ -34,8 +34,10 @@ class Home extends Component {
     }
 
     handleInputChange(e) {
+        
         this.setState({
-            [e.target.name]: e.target.value
+            [e.target.name]: e.target.value,
+            query: '',
         })
     }
 
@@ -74,14 +76,15 @@ class Home extends Component {
                         value={this.state.value}
 
                     >
-                        <option value=''>Level</option>
-                        <option value="&level=DEBUG" 
+                        <option value="" 
+                           value="&level=ERROR" 
                            name="level" >
                             Error</option>
-                        <option value="&level=DEBUG" 
+                        <option value="&level=WARNING" 
                           
                             name="level">
                             Warning</option>
+
                         <option value="&level=DEBUG"
                             name="level">
                             Debug</option>
