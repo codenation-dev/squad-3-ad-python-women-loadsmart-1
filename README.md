@@ -7,6 +7,7 @@ The project architecture consists of:
 - Backend Restfull API
 - Front End (React)
 
+
 ## Requirements
 
 You must have python 3.6 (ou superior), pip, postgres.
@@ -26,6 +27,7 @@ We recommend use a virtual env:
     python manage.py migrate
     python manage.py runserver
 
+
 open : http://localhost:8000/
 
 
@@ -44,6 +46,12 @@ To run:
     npm start
 
 open : http://localhost:3000/
+
+    
+## Frontend (folder front end)
+ install reduxDevtool extension for Chrome
+ 
+ npm start
 
 
 ## Documentation 

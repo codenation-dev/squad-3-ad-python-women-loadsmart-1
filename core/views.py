@@ -14,7 +14,7 @@ class ListAgentAll(mixins.ListModelMixin, generics.GenericAPIView):
     permission_classes = (IsAuthenticated,)
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentSerializer
-    
+
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 
@@ -40,7 +40,6 @@ class ListAgent(mixins.ListModelMixin, generics.GenericAPIView):
 
 class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
 
-
     """
     get:
     Return all the fields from a especific error
@@ -48,18 +47,18 @@ class DetailAgent(generics.RetrieveUpdateDestroyAPIView):
     put:
     partial update some fields are declared as read only
 
-    delete: 
+    delete:
     destroy object
     """
     permission_classes = (IsAuthenticated,)
     queryset = models.Agent.objects.all()
     serializer_class = serializers.AgentSerializer
 
-class CreateAgent(mixins.CreateModelMixin,
-                 generics.GenericAPIView):
+
+class CreateAgent(mixins.CreateModelMixin, generics.GenericAPIView):
 
     ''' post:
-        This allow client insert a new Agent  
+        This allow client insert a new Agent
         user = is_active'''
 
     permission_classes = (IsAuthenticated,)
@@ -69,16 +68,16 @@ class CreateAgent(mixins.CreateModelMixin,
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
-class ListError(mixins.ListModelMixin,
-                 generics.GenericAPIView):
 
-    """ get: 
-        return a list of all active errors 
+class ListError(mixins.ListModelMixin, generics.GenericAPIView):
 
-    filters: 
+    """ get:
+        return a list of all active errors
+
+    filters:
         SearchFilter => fields: 'sources', 'level'
         FilterSet => 'title', 'description' (using crysping forms)
-    
+
     examples:
          /?sources=TESTING&level=WARNING
          /?search=keyword+anotherword
@@ -91,33 +90,29 @@ class ListError(mixins.ListModelMixin,
 
     filter_backends = [
         filters.SearchFilter,
-        filters.OrderingFilter, 
+        filters.OrderingFilter,
         filtersfield.DjangoFilterBackend,
-        ]
+    ]
 
     search_fields = ['title', 'description']
     filterset_fields = ['sources', 'level']
-    ordering_fields = ['sources', 'level','created']
-    ordering = ['created'] #default order
+    ordering_fields = ['sources', 'level', 'created']
+    ordering = ['created']  # default order
 
-
-    
-    #this allow client make a search 
+    #this allow client make a search
     #http://127.0.0.1:8000/central?search=keyword+anotherword
-    #this allow client make a search 
+    #this allow client make a search
     #http://127.0.0.1:8000/central/?sources=TESTING&level=WARNING
 
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
-    
 
-class createError(
-    mixins.CreateModelMixin,
-    generics.GenericAPIView):
 
-    ''' 
+class createError(mixins.CreateModelMixin, generics.GenericAPIView):
+
+    '''
     post:
-        This allow client insert a new error data 
+        This allow client insert a new error data
         user, is_active and date are hidden'''
 
     permission_classes = (IsAuthenticated,)
@@ -146,7 +141,7 @@ class DetailError(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ErrorOcurrencesCountView(generics.RetrieveAPIView):
-    """ Return the numbers of events that have the same 
+    """ Return the numbers of events that have the same
     level and agent """
 
     permission_classes = (IsAuthenticated,)
