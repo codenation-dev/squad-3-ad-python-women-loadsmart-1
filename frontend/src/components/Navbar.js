@@ -29,7 +29,7 @@ class Navbar extends Component {
                     <img src={user.avatar} alt={user.name} title={user.name}
                         className="rounded-circle"
                         style={{ width: '25px', marginRight: '5px'}} />
-                           <button type="submit"  className="btn btn-outline-dark">
+                           <button type="submit"  className="btn btn-outline-primary">
                            Logout
                          </button> 
                 </a>
@@ -41,14 +41,14 @@ class Navbar extends Component {
      
             <li className="nav-item">
                 <Link className="nav-link" to="/login">
-                    <button  className="btn btn-outline-dark">
+                    <button  className="btn btn-outline-primary">
                         Login
                     </button>
                 </Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/register">
-                    <button  className="btn btn-dark">Sign Up
+                    <button  className="btn btn-primary">Sign Up
                     </button>
                 </Link>
             </li>

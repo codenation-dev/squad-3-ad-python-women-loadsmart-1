@@ -45,8 +45,8 @@ export default class Index extends Component {
             <thead>
               <tr>
                 <th>Level</th>
-                <th>Log</th>
                 <th>Source</th>
+                <th>Log</th>
                 <th>Events</th>
                 <th colSpan="2">Action</th>
               </tr>
@@ -57,7 +57,7 @@ export default class Index extends Component {
           </table>
         </div>
         <nav aria-label="Page navigation example">
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
           <li class="page-item"><a class="page-link" href="#">Previous</a></li>
           <li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>

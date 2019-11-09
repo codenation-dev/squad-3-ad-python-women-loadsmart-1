@@ -9,19 +9,20 @@ class TableRow extends Component {
             {this.props.obj.level}
           </td>
           <td>
-            {this.props.obj.log}
-          </td>
-          <td>
             {this.props.obj.sources}
           </td>
+          <td>
+            {this.props.obj.log}
+          </td>
+
           <td>
           {this.props.obj.error_counting}
           </td>
           <td>
-            <button className="btn btn-dark ">Edit</button>
+            <button className="btn btn-outline-primary ">Details</button>
           </td>
           <td>
-            <button className="btn btn-danger ">Delete</button>
+            <button className="btn btn-outline-danger ">Delete</button>
           </td>
         </tr>
     );

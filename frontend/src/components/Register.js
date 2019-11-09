@@ -57,8 +57,8 @@ class Register extends Component {
     render() {
         const { errors } = this.state;
         return(
-        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Registration</h2>
+        <div className="container" style={{ marginTop: '50px', width: '450px'}}>
+            <h2 align="center" style={{marginBottom: '40px'}}>REGISTRATION</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -112,10 +112,12 @@ class Register extends Component {
                     />
                     {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                 </div>
-                <div className="form-group">
-                    <button type="submit" className="btn btn-dark">
-                        Register User
+                <div className="form-group">  
+                    <div class="col-12 text-center">
+                    <button id="singlebutton" type="submit" className="btn btn-primary">
+                        Register
                     </button>
+                    </div>
                 </div>
             </form>
         </div>

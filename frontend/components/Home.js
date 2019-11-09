@@ -18,12 +18,12 @@ export default class Home extends Component {
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
                 <Link className="nav-link" to="/register">
-                    <button className="btn btn-dark btn-lg">REGISTER</button>
+                    <button className="btn btn-primary btn-lg">REGISTER</button>
                 </Link>
             </li>
             <li className="nav-item">
                 <Link className="nav-link" to="/login">
-                <button className="btn btn-outline-dark btn-lg">LOGIN</button>
+                <button className="btn btn-outline-primary btn-lg">LOGIN</button>
                 </Link>
             </li>
         </ul>

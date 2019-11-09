@@ -113,7 +113,7 @@ class Register extends Component {
                     {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
                 </div>
                 <div className="form-group">
-                    <button type="submit" className="btn btn-dark">
+                    <button type="submit" className="btn btn-primary">
                         Register User
                     </button>
                 </div>
