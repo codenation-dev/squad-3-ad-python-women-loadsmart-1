@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
 
+
 export default class Index extends Component {
 
   constructor(props) {
@@ -15,15 +16,14 @@ export default class Index extends Component {
         };
     }
     componentDidMount(){
-      axios.get('http://localhost:8000/api/central/')
+      var search = this.props.search;
+      axios.get('http://localhost:8000/api/central/'+search)
         .then(response => {
           this.setState({ register: response.data.results });
           this.setState({ count: response.data.count });
           this.setState({ next: response.data.next });
           this.setState({ previous: response.data.previous });
           console.log(response.data)
-          console.log('oi');
-
         })
         .catch(function (error) {
           console.log(error);
@@ -38,14 +38,15 @@ export default class Index extends Component {
 
     render() {
       return (
+        <>
+
         <div>
-          <h3 align="center"> Central de Erros</h3>
           <table className="table table-striped" style={{ marginTop: 20 }}>
             <thead>
               <tr>
                 <th>Level</th>
-                <th>Log</th>
                 <th>Source</th>
+                <th>Log</th>
                 <th>Events</th>
                 <th colSpan="2">Action</th>
               </tr>
@@ -55,6 +56,16 @@ export default class Index extends Component {
             </tbody>
           </table>
         </div>
+        <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+      </>
       );
     }
   }

@@ -16,27 +16,27 @@ class Navbar extends Component {
         const {isAuthenticated, user} = this.props.auth;
         const authLinks = (
             <ul className="navbar-nav ml-auto">
-                <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
+                <a href="" className="btn btn-outline-primary" onClick={this.onLogout.bind(this)}>
                     <img src={user.avatar} alt={user.name} title={user.name}
                         className="rounded-circle"
                         style={{ width: '25px', marginRight: '5px'}} />
-                            Logout
+                    <button class="btn btn-primary">Logout</button>
                 </a>
             </ul>
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
             <li className="nav-item">
-                <Link className="nav-link" to="/register">Sign Up</Link>
+                <Link className="btn btn-primary" to="/register">Sign Up</Link>
             </li>
-            <li className="nav-item">
+            <li class="btn btn-outline-primary">
                 <Link className="nav-link" to="/login">Sign In</Link>
             </li>
         </ul>
       )
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Redux Node Auth</Link>
+                <Link className="navbar-brand" to="/">Central de Erros Squad 3</Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>

@@ -102,8 +102,9 @@ class ErrorsDetailSerializer(serializers.ModelSerializer):
             'is_active',
             'created',
             'error_counting',
-            'agent_address',
-        )
+            'agent',
+       )
+
         read_only_fields = ('user', 'created', 'log')
 
 

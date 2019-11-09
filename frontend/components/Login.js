@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions/authentication';
 import classnames from 'classnames';
 
-class Login extends Component {
+class  extends Component {
 
     constructor() {
         super();
@@ -52,8 +52,9 @@ class Login extends Component {
     render() {
         const {errors} = this.state;
         return(
-        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Login</h2>
+        <div className="container" style=
+        {{ marginTop: '50px',marginBottom: '50px', width: '450px'}}>
+            <h2 style={{marginBottom: '40px'}}>LOGIN</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -83,7 +84,7 @@ class Login extends Component {
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">
-                        Login User
+                         User
                     </button>
                 </div>
             </form>
@@ -92,7 +93,7 @@ class Login extends Component {
     }
 }
 
-Login.propTypes = {
+.propTypes = {
     loginUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
@@ -103,4 +104,4 @@ const mapStateToProps = (state) => ({
     errors: state.errors
 })
 
-export  default connect(mapStateToProps, { loginUser })(Login)
+export  default connect(mapStateToProps, { loginUser })()

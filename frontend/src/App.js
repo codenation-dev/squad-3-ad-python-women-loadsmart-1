@@ -16,9 +16,9 @@ import ErrorCreate from './components/ErrorCreate';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-if(localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
+if(localStorage.access) {
+  setAuthToken(localStorage.access);
+  const decoded = jwt_decode(localStorage.access);
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000;
@@ -39,6 +39,7 @@ class App extends Component {
                 <div className="container">
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
+                
                   <Route exact path="/agent/create" component={ AgentCreate } />
                   <Route exact path="/error/create" component={ ErrorCreate } />
                 </div>

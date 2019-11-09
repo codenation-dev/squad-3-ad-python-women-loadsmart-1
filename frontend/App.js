@@ -13,9 +13,9 @@ import Home from './components/Home';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-if(localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
+if(localStorage.acess) {
+  setAuthToken(localStorage.acess);
+  const decoded = jwt_decode(localStorage.acess);
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000;
