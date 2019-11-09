@@ -23,6 +23,11 @@ class Navbar extends Component {
         const authLinks = (
             <>
             <ul>Bem-vind@ Username</ul>
+            <ul className="nav-item">
+                <Link className="nav-link" to="/agent/create">
+                        Create Agent
+                  </Link>
+            </ul>
             <ul className="navbar-nav ml-auto">
                
                 <a href="" className="nav-link" onClick={this.onLogout.bind(this)}>
@@ -38,7 +43,8 @@ class Navbar extends Component {
         )
       const guestLinks = (
         <ul className="navbar-nav ml-auto">
-     
+           
+
             <li className="nav-item">
                 <Link className="nav-link" to="/login">
                     <button  className="btn btn-outline-primary">
