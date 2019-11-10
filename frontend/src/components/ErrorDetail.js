@@ -9,6 +9,10 @@ const ErrorDetail = ({ errorDetail }) => {
 
   return (
     <section className="container">
+      <br/> <br/>
+      <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Home </button>
+      </a> 
+      <br/> <br/>
       <h1>            {errorDetail.log} </h1>
         <div class="row">
             <div class="col py-2 px-lg-7"> <br/>
@@ -52,7 +56,15 @@ const ErrorDetail = ({ errorDetail }) => {
                    {errorDetail.created}
 
 
-                     
+                  <br/>
+
+
+                 <br/> Is Active :  {errorDetail.is_active}
+
+
+   <br/>
+                  <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Arquivar </button>
+      </a> 
              
              </div>
          </div>
@@ -62,6 +74,7 @@ const ErrorDetail = ({ errorDetail }) => {
         </div>
       </div>
       <br/>
+     
     </section>
   );
   

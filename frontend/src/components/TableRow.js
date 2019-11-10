@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ErrorDetailPage from './ErrorDetailPage';
+import { deleteError } from '../actions/authentication';
+
 
 class TableRow extends Component {
   render() {
@@ -21,13 +22,15 @@ class TableRow extends Component {
           </td>
           <td>
             <Link to={`/${this.props.obj.id}`}>
-                <button className="btn btn-outline-primary ">Details
+                <button className="btn btn-outline-primary" >Details
                 </button>
             </Link>
             
           </td>
           <td>
-            <button className="btn btn-outline-danger ">Delete</button>
+            <button className="btn btn-outline-danger"  onClick= {deleteError(this.props.obj.id)} 
+             >
+              Delete</button>
           </td>
         </tr>
     );

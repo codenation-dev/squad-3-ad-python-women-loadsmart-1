@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { logoutUser } from '../actions/authentication';
+import { logoutUser,  } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
 import  CentralList from './CentralList'
 
@@ -14,8 +14,9 @@ class Home extends Component {
         super();
         this.state = {
             username: '',
-            sources_list: {},
-            level_list: {},
+            sources: '&sources=',
+            level: '&?ordering=level',
+            order: '&?order=',
             query:'',
             press:false,
         }
@@ -27,7 +28,7 @@ class Home extends Component {
     handleSubmit(e) {
         e.preventDefault();
         this.setState({
-            query: this.state.source+this.state.level,
+            query: this.state.source+this.state.level+this.state.order,
             press: true,
         });
         console.log('press button')     
@@ -38,6 +39,15 @@ class Home extends Component {
         this.setState({
             [e.target.name]: e.target.value,
             press: false,
+
+        })
+    }
+
+    handleChange(e) {
+        
+        this.setState({
+            [e.target.name]: e.target.value,
+          
 
         })
     }
@@ -61,6 +71,7 @@ class Home extends Component {
                     id="sourceSelect" name="source" 
                     onChange={ this.handleInputChange }
                     value={this.state.value}>
+                        <option value="?sources=">Source</option>
                         <option value="?sources=PRODUCTION">Production</option>
                         <option value="?sources=TESTING">Testing</option>
                         <option value="?sources=DEVELOPMENT">Development</option>
@@ -79,7 +90,7 @@ class Home extends Component {
 
                     >
                         <option value='&level='>Level</option>
-                        <option value="" 
+                        <option 
                            value="&level=ERROR" 
                            >
                             Error</option>
@@ -95,10 +106,17 @@ class Home extends Component {
                     </div>
                     <div class="col">
 
-                    <select class="custom-select" id="orderSelect" name="order">
-                        <option value="1" onChange={ this.handleInputChange }>Order default</option>
-                        <option value="2" onChange={ this.handleInputChange }>Level</option>
-                        <option value="3" onChange={ this.handleInputChange }>Frequência</option>
+                    <select class="custom-select" 
+                    id="orderSelect" 
+                    name="order" 
+                    onChange={ this.handleInputChange }>
+                        <option value="&?ordering=" >Order default</option>
+                        <option value="&?ordering=level" onChange={ this.handleInputChange }>Level Ascen</option>
+                        <option value="&?ordering=-level" onChange={ this.handleInputChange }>Level Descend</option>
+                        <option value="&?ordering=created" onChange={ this.handleInputChange }>Date Ascen</option>
+                        <option value="&?ordering=-created" onChange={ this.handleInputChange }>Date Descend</option>
+                        <option value="&?ordering=source" onChange={ this.handleInputChange }>Source Ascen</option>
+                        <option value="&?ordering=-source" onChange={ this.handleInputChange }>Source Descend</option>
                     </select>
                     </div>
                     <div class="col-5">
