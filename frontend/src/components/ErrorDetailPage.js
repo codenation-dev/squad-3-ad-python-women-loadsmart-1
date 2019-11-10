@@ -32,7 +32,12 @@ const ErrorDetailPage = ({ match }) => {
 
   return (
     <>
-     
+      <br/>
+
+     <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Home </button>
+      </a> 
+      <br/> <br/>
+
       {loading && (
         <div style={{ color: `green` }}>
           loading error detail for error ID: <strong>{errorId}</strong>
@@ -44,7 +49,6 @@ const ErrorDetailPage = ({ match }) => {
         </div>
       )}
        {errorDetail && <ErrorDetail errorDetail={errorDetail} />}
-    <Link to={`/`}>Go back to Home</Link>
     </>
   );
 

@@ -37,6 +37,8 @@ class Home extends Component {
         
         this.setState({
             [e.target.name]: e.target.value,
+            press: false,
+
         })
     }
 
@@ -59,7 +61,6 @@ class Home extends Component {
                     id="sourceSelect" name="source" 
                     onChange={ this.handleInputChange }
                     value={this.state.value}>
-                        <option > Source</option>
                         <option value="?sources=PRODUCTION">Production</option>
                         <option value="?sources=TESTING">Testing</option>
                         <option value="?sources=DEVELOPMENT">Development</option>
@@ -77,18 +78,18 @@ class Home extends Component {
                         value={this.state.value}
 
                     >
-                        <option value=''>Level</option>
+                        <option value='&level='>Level</option>
                         <option value="" 
                            value="&level=ERROR" 
-                           name="level" >
+                           >
                             Error</option>
                         <option value="&level=WARNING" 
                           
-                            name="level">
+                           >
                             Warning</option>
 
                         <option value="&level=DEBUG"
-                            name="level">
+                          >
                             Debug</option>
                     </select>
                     </div>
