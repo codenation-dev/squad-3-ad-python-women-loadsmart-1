@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import ErrorDetail from './ErrorDetail';
+import ErrorDetailPage from './ErrorDetailPage';
 
 class TableRow extends Component {
   render() {
