@@ -1,4 +1,4 @@
-# Central de erros 
+# Log management tool
 Squad-3 - Python Women Loadsmart
 
 This is  log management tool to unify your logs and  monitoring them.
