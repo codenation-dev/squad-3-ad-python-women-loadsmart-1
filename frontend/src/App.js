@@ -58,7 +58,6 @@ class App extends Component {
         </Router>
       </Provider>
 
-      <p>p</p>
 
       </>
     );

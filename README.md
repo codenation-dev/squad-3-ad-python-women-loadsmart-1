@@ -42,7 +42,14 @@ open : http://localhost:8000/
 
 ./manage.py loaddata db.json
 
-    
+## Security 
+    - Protected endpoints
+    - Authentication by using JWT (backend)
+    - Host header validation to prevent Cross Site Scripting attacks
+    - Protected routes (React)
+
+
+
 ## API Documentation 
 
 The Restfull API provided in this project is fully documented. 

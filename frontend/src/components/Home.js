@@ -65,9 +65,7 @@ class Home extends Component {
         
         const btnNotPress = (
                         <>
-                            <p>Pesquisando....clique no botão search para nova pesquisa</p>
-                            <br/>
-                            <CentralList search = {this.state.query}/>
+                             <CentralList search = {this.state.query}/>
                         </>
             )
         const authLinks = (
