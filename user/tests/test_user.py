@@ -11,7 +11,6 @@ def create_user(**params):
 
 
 class PublicUserApiTests(TestCase):
-  
     """Test the users API (public)"""
 
     def setUp(self):
