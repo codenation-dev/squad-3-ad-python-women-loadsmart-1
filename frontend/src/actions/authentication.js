@@ -32,6 +32,27 @@ export const createAgent = (agent) => dispatch => {
 }
 
 
+export const updateError = (id) => dispatch => {
+    axios.put(URL+'/api/central/'+id+'/' , {"is_active": false,})
+            .then(res => console.log(res))
+            .catch(err => {
+                console.log(err);
+            });
+}
+
+export const deleteError = (id) => dispatch => {
+    axios.delete(URL+'/api/central/'+id ,)
+            .then(res => console.log(res))
+            .catch(err => {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
+}
+
+
+
 export const createError = (errorObj) => dispatch => {
    
     axios.post(URL+'/api/central/create/', errorObj)

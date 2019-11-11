@@ -67,11 +67,11 @@ MIDDLEWARE = [
 #https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 #allow different origin acess all endpoint 
 
-CORS_ORIGIN_ALLOW_ALL = True #only in develop 
+CORS_ORIGIN_ALLOW_ALL = False # True only in development! 
                             #the whitelist will not be used
                             # and all origins will be accepted. Defaults to False.
 
-# ALLOWED_HOSTS = ['localhost','127.0.0.1' '.herokuapp.com']
+ALLOWED_HOSTS = ['localhost','127.0.0.1' '.herokuapp.com']
 
 ROOT_URLCONF = 'project.urls'
 

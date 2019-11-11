@@ -12,6 +12,8 @@ import Login from './components/Login';
 import Home from './components/Home';
 import AgentCreate from './components/AgentCreate';
 import ErrorCreate from './components/ErrorCreate';
+import ErrorDetailPage from './components/ErrorDetailPage';
+
 import ProtectRoute from './components/ProtectRoute';
 
 
@@ -29,13 +31,16 @@ if(localStorage.access) {
   }
 }
 
+
 class App extends Component {
 
   
   render() {
     
     return (
+      <>
       <Provider store = { store }>
+        
       <Router>
           <div>
             <Navbar />
@@ -46,10 +51,15 @@ class App extends Component {
               
                 <ProtectRoute exact path="/agent/create" component={ AgentCreate } />
                 <ProtectRoute exact path="/error/create" component={ ErrorCreate } />
+                <ProtectRoute path="/central/:errorId" exact component={ErrorDetailPage} />
+
               </div>
           </div>
         </Router>
       </Provider>
+
+
+      </>
     );
   }
   

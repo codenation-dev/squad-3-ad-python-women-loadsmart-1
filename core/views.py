@@ -85,7 +85,16 @@ class ListError(mixins.ListModelMixin, generics.GenericAPIView):
     """
 
     permission_classes = (IsAuthenticated,)
-    queryset = models.Error.objects.filter(is_active=True)
+    
+    def get_queryset(self):
+        """
+        This view should return a list of all the agents
+        for the currently authenticated user.
+        """
+        user_current = self.request.user
+        return models.Error.objects.filter(is_active=True)
+
+  
     serializer_class = serializers.ErrorsSerializer
 
     filter_backends = [
