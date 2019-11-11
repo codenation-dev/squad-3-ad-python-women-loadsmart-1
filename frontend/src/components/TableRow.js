@@ -64,7 +64,7 @@ handleDesativate(e) {
           <td>
             <button className="btn btn-outline-secondary"  onClick= {this.handleDesativate} 
              >
-              Desactivete</button>
+              Deactivate</button>
           </td>
 
           <td>

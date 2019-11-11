@@ -54,8 +54,9 @@ const ErrorDetail = ({ errorDetail }) => {
                   <br/>
                  <br/> Is Active :  {errorDetail.is_active}
                 <br/>
-                  <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Arquivar </button>
+                  <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Deactivate </button>
                   </a> 
+
              
              </div>
          </div>

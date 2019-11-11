@@ -132,7 +132,7 @@ class AgentCreate extends Component {
         )
       const guestLinks = (
         <>
-        <p>Usuário não autenticado</p>
+        <p>Unauthenticated user.</p>
         </>
       )
         return(
