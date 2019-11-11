@@ -73,7 +73,7 @@ class Home extends Component {
         const authLinks = (
             <>
             <br></br>
-            <h1 align="center"> CENTRAL DE ERROS</h1>
+            <h1 align="center"> ERROR CENTER</h1>
         
 
                 <form onSubmit={ this.handleSubmit }>
@@ -148,7 +148,7 @@ class Home extends Component {
         )
       const guestLinks = (
         <>
-        <p>Central de erros. Boas-vindas, usuário não autenticado.</p>
+        <p>Error center. Welcome, unauthenticated user.</p>
         </>
       )
         return(
