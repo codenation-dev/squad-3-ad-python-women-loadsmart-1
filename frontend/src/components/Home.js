@@ -7,9 +7,10 @@ import { withRouter } from 'react-router-dom';
 import  CentralList from './CentralList'
 
 
-var data = '?sources=DEVELOPMENT&level=';
 
 class Home extends Component {
+
+    
     constructor() {
         super();
         this.state = {
@@ -18,24 +19,27 @@ class Home extends Component {
             level: '&?ordering=level',
             order: '&?order=',
             query:'',
-            press:false,
+            press: true,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
 
     }
 
+    
+
     handleSubmit(e) {
         e.preventDefault();
+        if (this)
         this.setState({
             query: this.state.source+this.state.level+this.state.order,
             press: true,
         });
-        console.log('press button')     
+        console.log('press button')
     }
 
+
     handleInputChange(e) {
-        
         this.setState({
             [e.target.name]: e.target.value,
             press: false,
@@ -44,20 +48,28 @@ class Home extends Component {
     }
 
     handleChange(e) {
-        
         this.setState({
-            [e.target.name]: e.target.value,
+        [e.target.name]: e.target.value,
           
-
         })
     }
 
+
+
     render() {
-        const {isAuthenticated, } = this.props.auth;
-        const btnPress = ( <CentralList search = {this.state.query}/> 
-            )
+        const {isAuthenticated } = this.props.auth;
+        const btnPress = (
+             <>                    
+                    <CentralList search = {this.state.query}/> 
+            </> )
         
-        const btnNotPress = (<p></p>)
+        const btnNotPress = (
+                        <>
+                            <p>Pesquisando....clique no botão search para nova pesquisa</p>
+                            <br/>
+                            <CentralList search = {this.state.query}/>
+                        </>
+            )
         const authLinks = (
             <>
             <br></br>
@@ -109,21 +121,21 @@ class Home extends Component {
                     <select class="custom-select" 
                     id="orderSelect" 
                     name="order" 
-                    onChange={ this.handleInputChange }>
+                    onChange={ this.handleInput}>
                         <option value="&?ordering=" >Order default</option>
-                        <option value="&?ordering=level" onChange={ this.handleInputChange }>Level Ascen</option>
-                        <option value="&?ordering=-level" onChange={ this.handleInputChange }>Level Descend</option>
-                        <option value="&?ordering=created" onChange={ this.handleInputChange }>Date Ascen</option>
-                        <option value="&?ordering=-created" onChange={ this.handleInputChange }>Date Descend</option>
-                        <option value="&?ordering=source" onChange={ this.handleInputChange }>Source Ascen</option>
-                        <option value="&?ordering=-source" onChange={ this.handleInputChange }>Source Descend</option>
+                        <option value="&?ordering=level" >Level Ascen</option>
+                        <option value="&?ordering=-level" >Level Descend</option>
+                        <option value="&?ordering=created" >Date Ascen</option>
+                        <option value="&?ordering=-created" >Date Descend</option>
+                        <option value="&?ordering=source" >Source Ascen</option>
+                        <option value="&?ordering=-source" >Source Descend</option>
                     </select>
                     </div>
                     <div class="col-5">
                         <input type="text" class="form-control" placeholder="search"/>
                     </div>
-                        <button type="submit"  className="btn btn-primary " onClick={e => {
-                           }}> SEARCH
+                        <button type="submit"  className="btn btn-primary " onClick={e => 
+                            { this.state.press = false }}> SEARCH
                         </button>
                  </div>
                 </form>
@@ -140,11 +152,14 @@ class Home extends Component {
         </>
       )
         return(
-            
+                    <>
+          
                 <section className="container" id="welcome">
                     {isAuthenticated ? authLinks : guestLinks}
+
+
                 </section>
-          
+            </>
         )
     }
 }
