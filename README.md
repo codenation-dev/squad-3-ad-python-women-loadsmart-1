@@ -40,7 +40,7 @@ open : http://localhost:8000/
 
 ## Provide inicial data
 
-./manage.py loaddata db.json
+python manage.py loaddata db.json
 
 ## Security 
     - Protected endpoints

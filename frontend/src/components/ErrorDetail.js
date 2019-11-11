@@ -16,17 +16,13 @@ const ErrorDetail = ({ errorDetail }) => {
       <h1>            {errorDetail.log} </h1>
         <div class="row">
             <div class="col py-2 px-lg-7"> <br/>
-
             <h3> Title: {errorDetail.title}</h3>
-            
-           <br/> 
-           <br/> Description 
-           <br/> <br/>
-           {errorDetail.description}
+            <br/> <br/> Description  <br/> 
+            <br/> {errorDetail.description}
            <br/>
            
            </div>
-             <div class="col-3 py-3 px-lg-3 border bg-light">
+             <div class="col-4 py-3 px-lg-3 border bg-light">
                <br/>
                <button type="button" class="btn btn-danger">{errorDetail.level}
                </button>
@@ -37,34 +33,29 @@ const ErrorDetail = ({ errorDetail }) => {
 
                </button>
                <br/>
+               <br/>
+                  Id : 
+                  {errorDetail.id}
                <br/> <b>Frequency:</b> <br/>  
                {errorDetail.error_counting}
                   <br/>
                <b>Colected by: </b> <br/>
                         {errorDetail.user}
                    <br/>
+            
                   <br/>
-                  Id : 
-                  {errorDetail.id}
+                  <b>Agent Details: </b>
                   <br/>
-                  Agent Address: {errorDetail.agent}
+                  Agent id: {errorDetail.agent}
+                  <AgentDetail search = {errorDetail.agent}/> 
                   <br/>
-
-
                  <br/> Created :      
-    
-                   {errorDetail.created}
-
-
+                       {errorDetail.created}
                   <br/>
-
-
                  <br/> Is Active :  {errorDetail.is_active}
-
-
-   <br/>
+                <br/>
                   <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Arquivar </button>
-      </a> 
+                  </a> 
              
              </div>
          </div>
