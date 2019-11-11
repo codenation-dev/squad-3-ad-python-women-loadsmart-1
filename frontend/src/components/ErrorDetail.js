@@ -63,7 +63,7 @@ const ErrorDetail = ({ errorDetail }) => {
 
 
    <br/>
-                  <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Arquivar </button>
+                  <a href="/" class="alert-link"><button type="button" class="btn btn-outline-dark"> Save </button>
       </a> 
              
              </div>

@@ -20,7 +20,7 @@ class Navbar extends Component {
         const authLinks = (
             <>
             <ul>
-                <div>Bem-vind@ Username</div>
+                <div>Welcome!</div>
 
             </ul>
        
@@ -58,7 +58,7 @@ class Navbar extends Component {
       )
         return(
             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                <Link className="navbar-brand" to="/">Central de Erros Squad 3 </Link>
+                <Link className="navbar-brand" to="/">Error Center Squad 3 </Link>
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                     {isAuthenticated ? authLinks : guestLinks}
                 </div>
