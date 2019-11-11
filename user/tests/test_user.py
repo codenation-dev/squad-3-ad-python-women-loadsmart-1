@@ -4,13 +4,14 @@ from rest_framework import status
 from rest_framework.test import APIClient
 
 
-
 def create_user(**params):
     """Function that help to create new user"""
+
     return get_user_model().objects.create_user(**params)
 
 
 class PublicUserApiTests(TestCase):
+  
     """Test the users API (public)"""
 
     def setUp(self):

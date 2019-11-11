@@ -26,9 +26,6 @@ SECRET_KEY = '%c_$%9jo(8fphl+86(zd%_tpe_%9itr*49!xb(evhn!7ndq+wb'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +35,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites', # modified
+    'django.contrib.sites',  # modified
     'rest_auth.registration',
     'django_filters',
     'rest_framework',
@@ -67,11 +64,12 @@ MIDDLEWARE = [
 #https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 #allow different origin acess all endpoint 
 
-CORS_ORIGIN_ALLOW_ALL = False # True only in development! 
-                            #the whitelist will not be used
-                            # and all origins will be accepted. Defaults to False.
+CORS_ORIGIN_ALLOW_ALL = False    # True only in development! 
 
-ALLOWED_HOSTS = ['localhost','127.0.0.1' '.herokuapp.com']
+ALLOWED_HOSTS = ['localhost',
+    '127.0.0.1',
+    '.herokuapp.com'
+]
 
 ROOT_URLCONF = 'project.urls'
 
@@ -90,8 +88,6 @@ TEMPLATES = [
         },
     },
 ]
-
-
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -129,17 +125,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-   
+    },   
 ]
-
 
 # Modified 
 REST_AUTH_SERIALIZERS = {
     'LOGIN_SERIALIZER': 'user.serializers.CustomLoginSerializer',
-    'USER_DETAILS_SERIALIZER':'user.serializers.CustomUserDetailsSerializer',
+    'USER_DETAILS_SERIALIZER': 'user.serializers.CustomUserDetailsSerializer',
     'TOKEN_SERIALIZER': 'rest_auth.serializers.TokenSerializer',
-
 }
 
 CORS_ORIGIN_WHITELIST = (
@@ -189,7 +182,8 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',), 
-    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' # to swagger documentation UI
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' 
+    # to swagger documentation UI
 }
 
 

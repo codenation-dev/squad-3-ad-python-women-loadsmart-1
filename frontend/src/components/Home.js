@@ -19,7 +19,7 @@ class Home extends Component {
             level: '&?ordering=level',
             order: '&?order=',
             query:'',
-            press: true,
+            press: false,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -61,10 +61,12 @@ class Home extends Component {
         const btnPress = (
              <>                    
                     <CentralList search = {this.state.query}/> 
+                    {this.state.query}
             </> )
         
         const btnNotPress = (
                         <>
+                        {this.state.query}
                              <CentralList search = {this.state.query}/>
                         </>
             )
@@ -119,7 +121,7 @@ class Home extends Component {
                     <select class="custom-select" 
                     id="orderSelect" 
                     name="order" 
-                    onChange={ this.handleInput}>
+                    onChange={ this.handleInputChange}>
                         <option value="&?ordering=" >Order default</option>
                         <option value="&?ordering=level" >Level Ascen</option>
                         <option value="&?ordering=-level" >Level Descend</option>
@@ -150,12 +152,9 @@ class Home extends Component {
         </>
       )
         return(
-                    <>
-          
-                <section className="container" id="welcome">
+                <>
+                    <section className="container" id="welcome">
                     {isAuthenticated ? authLinks : guestLinks}
-
-
                 </section>
             </>
         )

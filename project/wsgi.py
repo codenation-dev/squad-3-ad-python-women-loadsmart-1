@@ -15,4 +15,3 @@ from whitenoise.django import DjangoWhiteNoise
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'project.settings')
 
 application = DjangoWhiteNoise(application)
-
