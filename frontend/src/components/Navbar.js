@@ -20,7 +20,8 @@ class Navbar extends Component {
         const authLinks = (
             <>
             <ul>
-                <div>Bem-vind@ Username</div>
+                {console.log(user)}
+                <div>Bem-vind@ {user.name}</div>
 
             </ul>
        
