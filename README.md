@@ -1,7 +1,7 @@
 # Central de erros 
 Squad-3 - Python Women Loadsmart
 
-This is  log management tool, to unify your logs and  monitoring.
+This is  log management tool to unify your logs and  monitoring them.
 It's useful to detect and respond to performance issues.
 
 On modern projects, it is  common the use of architectures based on services or microservices. 
@@ -56,6 +56,7 @@ The Restfull API provided in this project is fully documented.
 To do this we've used 'django-rest-swagger' package.
 
 
+
 http://127.0.0.1:8000/doc/ 
 (UI documentation using swagger - must be loged to acess the complete documentation)
 
@@ -63,7 +64,7 @@ http://127.0.0.1:8000/doc/
 !![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/documentation.png)
 
 
-## Frontend 
+## FRONTEND 
 You must have node
 install reduxDevtool extension for Chrome
 
