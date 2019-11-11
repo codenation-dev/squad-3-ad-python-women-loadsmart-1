@@ -18,6 +18,8 @@ class Home extends Component {
             sources: '&sources=',
             level: '&?ordering=level',
             order: '&?order=',
+            search: ' ',
+
             query:'',
             press: false,
         }
@@ -25,19 +27,40 @@ class Home extends Component {
         this.handleInputChange = this.handleInputChange.bind(this);
 
     }
-
-    
-
+   
     handleSubmit(e) {
         e.preventDefault();
+        if (this.state.source == undefined){
+            this.state.source = '?sources=';
+        }
+
+        
         if (this)
-        this.setState({
-            query: this.state.source+this.state.level+this.state.order,
-            press: true,
+            this.setState({
+                query: this.state.source+this.state.level+this.state.order,
+                press: true,
+
+            });
+
+        if (this.state.search.length > 1 ){
+                this.setState({
+                query: '?search='+this.state.search,
+                press: true,
         });
+    
+        }
         console.log('press button')
     }
 
+    handleSubmitSearch(e) {
+        e.preventDefault();
+       if (this)
+        this.setState({
+            query: this.state.search,
+            press: true,
+        });
+        console.log('press button search')
+    }
 
     handleInputChange(e) {
         this.setState({
@@ -61,17 +84,16 @@ class Home extends Component {
         const btnPress = (
              <>                    
                     <CentralList search = {this.state.query}/> 
-                    {this.state.query}
             </> )
         
         const btnNotPress = (
                         <>
-                        {this.state.query}
                              <CentralList search = {this.state.query}/>
                         </>
             )
         const authLinks = (
             <>
+            <div className="container">
             <br></br>
             <h1 align="center"> ERROR CENTER</h1>
         
@@ -102,18 +124,10 @@ class Home extends Component {
 
                     >
                         <option value='&level='>Level</option>
-                        <option 
-                           value="&level=ERROR" 
-                           >
-                            Error</option>
-                        <option value="&level=WARNING" 
-                          
-                           >
-                            Warning</option>
+                        <option value="&level=ERROR">Error</option>
+                        <option value="&level=WARNING">Warning</option>
 
-                        <option value="&level=DEBUG"
-                          >
-                            Debug</option>
+                        <option value="&level=DEBUG">Debug</option>
                     </select>
                     </div>
                     <div class="col">
@@ -131,18 +145,29 @@ class Home extends Component {
                         <option value="&?ordering=-source" >Source Descend</option>
                     </select>
                     </div>
-                    <div class="col-5">
-                        <input type="text" class="form-control" placeholder="search"/>
+                    
+                        
+                        <div class="col-5">
+                        <input type="text" 
+                        class="form-control" 
+                        placeholder="search"
+                        name="search" 
+                        value={this.state.value}
+                        onChange={ this.handleInputChange}/>
                     </div>
-                        <button type="submit"  className="btn btn-primary " onClick={e => 
+
+                    <button type="submit"  className="btn btn-primary " onClick={e => 
                             { this.state.press = false }}> SEARCH
                         </button>
+                     
                  </div>
                 </form>
+                <br/>
                 
             <div className="container">
                     {this.state.press ? btnPress : btnNotPress}
             </div>
+         </div>
             
             </>
         )

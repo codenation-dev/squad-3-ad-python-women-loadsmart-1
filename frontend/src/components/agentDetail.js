@@ -1,45 +1,56 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react';
 import axios from 'axios';
 
-const AgentDetail = ({ match }) => {
-  const {
-    params: { agentId },
-  } = match;
+export default class AgentDetail extends Component {
+
+  constructor(props) {
+      super(props);
+      this.state = {
+          address: '', 
+          env: '',
+          name: '',
+         
+        };
+    }
+
+    componentDidMount(){
+      var search = this.props.search;
+      axios.get('http://localhost:8000/api/agent/'+search)
+        .then(response => {
+          this.setState({ 
+            name: response.data['name'] ,
+            address: response.data['address'],
+            env: response.data['env']
+
+          });
+          console.log(response.data)
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+
+  
+
+    render() {
+      return (
+        <> <br/>
+        
+        Agent name:{this.state.name}
+         <br/>
+        Agente env: {this.state.env}
+        <br/>
+        Agent address:{this.state.address}
+         </>
+      );
+
+    }
+
+  }
+    
 
 
-  const [AgentDetail, setAgentDetail] = useState(null);
-  const [AgentDetailError, setAgentDetailErrror] = useState(false);
-  const [loading, setLoading] = useState(false);
-  agentId = 1;
 
-  useEffect(() => {
-    const API_BASE_URL = `http://localhost:8000/api/agent`;
-    const fetchAgentDetail = async () => {
-      setLoading(true);
-      setAgentDetailErrror(false);
-      try {
-        const result = await axios.get(`${API_BASE_URL}/${agentId}`);
-        setAgentDetail(result.data);
-      } catch (error) {
-        setAgentDetailErrror(true);
-      }
-      setLoading(false);
-    };
-    // Call the API
-    fetchAgentDetail();
-  }, [agentId]);
-
-  return (
-    <>
-    <strong>{agentId}</strong>
-
-      <br/>{AgentDetail.address} </>
-  );
-
-};
-
-export default AgentDetail;
 
 
 
