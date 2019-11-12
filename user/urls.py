@@ -8,7 +8,6 @@ urlpatterns = [
     path('register/', views.CreateUserView.as_view(), name='create'),
     path('me/', views.ManageUserView.as_view(), name='me'),
     path('', include('rest_auth.urls')),
-    # provides login / logout /  resetpass  etc 
+    # provides login / logout /  resetpass  etc
     # https://django-rest-auth.readthedocs.io/en/latest/configuration.html
-
 ]

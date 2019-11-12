@@ -1,0 +1,3 @@
+config.headers = {
+    Authorization: `Bearer ${localStorage.authToken}`
+  }

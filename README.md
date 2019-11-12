@@ -1,19 +1,26 @@
-# Central de erros 
-(Squad-3 - Python Women Loadsmart)
+# Log management tool
+Squad-3 - Python Women Loadsmart
 
-In this project is a aplication to register error logs.
+This is  log management tool to unify your logs and  monitoring them.
+It's useful to detect and respond to performance issues.
+
+On modern projects, it is  common the use of architectures based on services or microservices. 
+In these complex environments, errors can happen in different layers of an application 
+(backend, frontend, mobile, and desktop) even in distinct services. 
+
+Therefore, developers need to be able to centralize all the errors registers in one place, 
+by doing this they can monitor, make more precise decisions about those errors and 
+categorize errors by priority or frequency. 
+
 
 The project architecture consists of:
-- Backend Restfull API
+- Backend Restfull API 
 - Front End (React)
+
 
 ## Requirements
 
 You must have python 3.6 (ou superior), pip, postgres.
-
-For Authentication Tests we recomend the extension "Modify headers" (Chrome).
- 
-Postgres : Open your linux terminal - sudo apt install postgresql-server-dev-all
 
 We recommend use a virtual env:
 
@@ -27,13 +34,44 @@ We recommend use a virtual env:
     python manage.py runserver
 
 
-## Documentation 
+open : http://localhost:8000/
+
+
+
+## Provide inicial data
+
+python manage.py loaddata db.json
+
+## Security 
+    - Protected endpoints
+    - Authentication by using JWT (backend)
+    - Host header validation to prevent Cross Site Scripting attacks
+    - Protected routes (React)
+
+
+
+## API Documentation 
+
+The Restfull API provided in this project is fully documented. 
+To do this we've used 'django-rest-swagger' package.
+
+
 
 http://127.0.0.1:8000/doc/ 
 (UI documentation using swagger - must be loged to acess the complete documentation)
 
-http://127.0.0.1:8000/openapi
-
-Acess http://editor.swagger.io/ and past the content.
 
 !![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/documentation.png)
+
+
+## FRONTEND 
+You must have node
+install reduxDevtool extension for Chrome
+
+To run:
+    cd frontend
+    npm install
+    npm start
+
+open : http://localhost:3000/
+

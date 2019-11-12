@@ -10,12 +10,18 @@ import Navbar from './components/Navbar';
 import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
+import AgentCreate from './components/AgentCreate';
+import ErrorCreate from './components/ErrorCreate';
+import ErrorDetailPage from './components/ErrorDetailPage';
+
+import ProtectRoute from './components/ProtectRoute';
+
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-if(localStorage.jwtToken) {
-  setAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
+if(localStorage.access) {
+  setAuthToken(localStorage.access);
+  const decoded = jwt_decode(localStorage.access);
   store.dispatch(setCurrentUser(decoded));
 
   const currentTime = Date.now() / 1000;
@@ -25,23 +31,39 @@ if(localStorage.jwtToken) {
   }
 }
 
+
 class App extends Component {
+
+  
   render() {
+    
     return (
+      <>
       <Provider store = { store }>
-        <Router>
-            <div>
-              <Navbar />
-                <Route exact path="/" component={ Home } />
-                <div className="container">
-                  <Route exact path="/register" component={ Register } />
-                  <Route exact path="/login" component={ Login } />
-                </div>
-            </div>
-          </Router>
-        </Provider>
+        
+      <Router>
+          <div>
+            <Navbar />
+              <Route exact path="/" component={ Home } />
+              <div className="container">
+                <Route exact path="/register" component={ Register } />
+                <Route exact path="/login" component={ Login } />
+              
+                <ProtectRoute exact path="/agent/create" component={ AgentCreate } />
+                <ProtectRoute exact path="/error/create" component={ ErrorCreate } />
+                <ProtectRoute path="/central/:errorId" exact component={ErrorDetailPage} />
+
+              </div>
+          </div>
+        </Router>
+      </Provider>
+
+
+      </>
     );
   }
+  
 }
+
 
 export default App;

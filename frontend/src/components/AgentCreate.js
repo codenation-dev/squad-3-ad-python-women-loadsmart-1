@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createAgent } from '../actions/authentication';
 import { withRouter } from 'react-router-dom';
-import { registerUser } from '../actions/authentication';
 import classnames from 'classnames';
 
-class Register extends Component {
+
+class AgentCreate extends Component {
 
     constructor() {
         super();
         this.state = {
             name: '',
-            email: '',
-            password: '',
-            password_confirm: '',
+            address: '',
+            status: true,
+            env: '',
+            version: '',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -28,13 +30,13 @@ class Register extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const user = {
+        const agent = {
             name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            password_confirm: this.state.password_confirm
+            address: this.state.address,
+            env: this.state.env,
+            version: this.state.version
         }
-        this.props.registerUser(user, this.props.history);
+        this.props.createAgent(agent);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -48,24 +50,31 @@ class Register extends Component {
         }
     }
 
+
     componentDidMount() {
-        if(this.props.auth.isAuthenticated) {
-            this.props.history.push('/');
+        if (this.props.auth.isAuthenticated)  {
+           // this.props.history.push('/');
         }
-    }
+    } 
+
 
     render() {
+        const {isAuthenticated} = this.props.auth;
         const { errors } = this.state;
-        return(
-        <div className="container" style={{ marginTop: '50px', width: '450px'}}>
-            <h2 align="center" style={{marginBottom: '40px'}}>REGISTRATION</h2>
+
+        const authLinks = (
+            <>
+            
+
+            <div className="container" style={{ marginTop: '50px', width: '700px'}}>
+            <h2 style={{marginBottom: '40px'}}>New Agent</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
                     type="text"
                     placeholder="Name"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.name
+                       
                     })}
                     name="name"
                     onChange={ this.handleInputChange }
@@ -75,64 +84,73 @@ class Register extends Component {
                 </div>
                 <div className="form-group">
                     <input
-                    type="email"
-                    placeholder="Email"
+                    type="adress"
+                    placeholder="IP Address"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.email
+                        'is-invalid': errors.address
                     })}
-                    name="email"
+                    name="address"
                     onChange={ this.handleInputChange }
-                    value={ this.state.email }
+                    value={ this.state.address }
                     />
-                    {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+                    {errors.address && (<div className="invalid-feedback">{errors.address}</div>)}
                 </div>
                 <div className="form-group">
                     <input
-                    type="password"
-                    placeholder="Password"
+                    type="text"
+                    placeholder="Env"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password
+                        'is-invalid': errors.env
                     })}
-                    name="password"
+                    name="env"
                     onChange={ this.handleInputChange }
-                    value={ this.state.password }
+                    value={ this.state.env }
                     />
-                    {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
+                    {errors.env && (<div className="invalid-feedback">{errors.env}</div>)}
                 </div>
                 <div className="form-group">
                     <input
-                    type="password"
-                    placeholder="Confirm Password"
+                    type="text"
+                    placeholder="Version"
                     className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password_confirm
+                        'is-invalid': errors.version
                     })}
-                    name="password_confirm"
+                    name="version"
                     onChange={ this.handleInputChange }
-                    value={ this.state.password_confirm }
+                    value={ this.state.version }
                     />
-                    {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
+                    {errors.version && (<div className="invalid-feedback">{errors.version}</div>)}
                 </div>
-                <div className="form-group">  
-                    <div class="col-12 text-center">
-                    <button id="singlebutton" type="submit" className="btn btn-primary">
-                        Register
+                <div className="form-group">
+                    <button type="submit" className="btn btn-primary">
+                        Create
                     </button>
-                    </div>
                 </div>
             </form>
         </div>
+        </>
+        )
+      const guestLinks = (
+        <>
+        <p>Unauthenticated user.</p>
+        </>
+      )
+        return(
+            
+                <section className="container" id="welcome">
+                    {isAuthenticated ? authLinks : guestLinks}
+                </section>
+          
         )
     }
 }
-
-Register.propTypes = {
-    registerUser: PropTypes.func.isRequired,
+AgentCreate.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
-};
+}
 
-const mapStateToProps = state => ({
-    auth: state.auth,
-    errors: state.errors
-});
+const mapStateToProps = (state) => ({
+    auth: state.auth
+})
 
-export default connect(mapStateToProps,{ registerUser })(withRouter(Register))
+export default connect(mapStateToProps, { createAgent })(withRouter(AgentCreate));

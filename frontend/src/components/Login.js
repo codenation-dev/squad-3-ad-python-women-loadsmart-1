@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { loginUser } from '../actions/authentication';
+import { loginUser} from '../actions/authentication';
 import classnames from 'classnames';
 
 class Login extends Component {
@@ -52,8 +52,8 @@ class Login extends Component {
     render() {
         const {errors} = this.state;
         return(
-        <div className="container" style={{ marginTop: '50px', width: '700px'}}>
-            <h2 style={{marginBottom: '40px'}}>Login</h2>
+        <div className="container" style={{ marginTop: '50px', width: '450px'}}>
+            <h2 align="center" style={{marginBottom: '40px'}}>LOGIN</h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -82,9 +82,11 @@ class Login extends Component {
                     {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
                 </div>
                 <div className="form-group">
+                    <div class="col-12 text-center">
                     <button type="submit" className="btn btn-primary">
-                        Login User
+                        Login 
                     </button>
+                    </div>
                 </div>
             </form>
         </div>
