@@ -82,20 +82,21 @@ class Home extends Component {
     render() {
         const {isAuthenticated } = this.props.auth;
         const btnPress = (
-             <>                    
+             <>         
                     <CentralList search = {this.state.query}/> 
             </> )
         
         const btnNotPress = (
-                        <>
-                             <CentralList search = {this.state.query}/>
+                        <>      Click on seach to apply filters
+                          <CentralList search = {this.state.query}/> 
+
                         </>
             )
         const authLinks = (
             <>
             <div className="container">
             <br></br>
-            <h1 align="center"> ERROR CENTER</h1>
+            <h1 align="center"> LOG MANAGEMENT CENTER</h1>
         
 
                 <form onSubmit={ this.handleSubmit }>
