@@ -77,10 +77,10 @@ To run:
 open : http://localhost:3000/
 
 
-!![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/6.png)
-!![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/7.png)
+![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/6.png)
+![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/7.png)
 
 
-!![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/1.png)
+![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/1.png)
 
-!![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/2.png)
+![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/2.png)
