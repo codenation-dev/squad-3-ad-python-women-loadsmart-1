@@ -44,14 +44,14 @@ export default class Index extends Component {
         <>
 
         <div>
-          <table className="table table-striped" style={{ marginTop: 20 }}>
+          <table className="table table" style={{ marginTop: 20 }}>
             <thead>
               <tr>
                 <th>Level</th>
                 <th>Source</th>
                 <th>Log</th>
                 <th>Events</th>
-                <th colSpan="2">Action</th>
+                <th colSpan="3">Action</th>
               </tr>
             </thead>
             <tbody>

@@ -18,8 +18,6 @@ class TableRow extends Component {
 
 }
 
-
-
   handleDelete(e) {
     this.setState({
     [e.target.name]: e.target.value,
@@ -66,7 +64,7 @@ handleDesativate(e) {
           <td>
             <button className="btn btn-outline-secondary"  onClick= {this.handleDesativate} 
              >
-              Desactivete</button>
+              Deactivate</button>
           </td>
 
           <td>
