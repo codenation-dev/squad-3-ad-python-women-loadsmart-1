@@ -3,10 +3,16 @@ from django.test import TestCase
 
 class ModelsTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create(name = "maira", email = "maira@hotmail.com", is_active = True, is_staff = False)
-        user2 = User.objects.create(name = "clara", email = "clara@hotmail", is_active = True, is_staff = False)
-        agent = Agent.objects.create(name = "leonardo", id = 100, user = user, address = "192.168.1.1", status = True, env = "prod", version = "1.1.1")
-        error= Error.objects.create(title = "Error1" ,user = user, agent = agent, log = "logTest", level = "WARNING", sources = "ERROR", description = "test description", is_active = True)
+        user = User.objects.create(name = "maira", 
+            email = "maira@hotmail.com", is_active = True, is_staff = False)
+        user2 = User.objects.create(name = "clara", 
+            email = "clara@hotmail", is_active = True, is_staff = False)
+        agent = Agent.objects.create(name = "leonardo", 
+            id = 100, user = user, address = "192.168.1.1", status = True, 
+            env = "prod", version = "1.1.1")
+        error= Error.objects.create(title = "Error1" ,user = user, 
+            agent = agent, log = "logTest", level = "WARNING",
+            sources = "ERROR", description = "test description", is_active = True)
 
     def test_user(self):
         user = User.objects.get(name = "maira")

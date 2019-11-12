@@ -42,7 +42,8 @@ class PublicUserApiTests(TestCase):
     def test_user_exists(self):
         """Test creating a user that already exists fails"""
 
-        payload = {'email': 'test2@test-api.com','name':'test', 'password': 'testpass'}
+        payload = {'email': 'test2@testapi.com','name':'test', 
+        'password': 'testpass'}
         #Should not pass - if user already exist.
 
         self.client.post('http://127.0.0.1:8000/users/register/', payload)
