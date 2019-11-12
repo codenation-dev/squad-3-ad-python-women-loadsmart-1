@@ -10,24 +10,27 @@ export default class Index extends Component {
       this.state = {
           register: [], 
           count: 0,
-          next: null,
+          next: 'http://localhost:8000/api/central/',
           previous: null,
     
         };
     }
-    componentDidMount(){
-      var search = this.props.search;
-      axios.get('http://localhost:8000/api/central/'+search)
+
+    getLogs = (direction = 'next')=> {
+      const search = this.props.search;
+      axios.get(this.state[direction]+search)
         .then(response => {
           this.setState({ register: response.data.results });
           this.setState({ count: response.data.count });
           this.setState({ next: response.data.next });
           this.setState({ previous: response.data.previous });
-          console.log(response.data)
         })
         .catch(function (error) {
-          console.log(error);
         })
+    }
+
+    componentDidMount(){
+      this.getLogs();
     }
     tabRow(){
 
@@ -58,11 +61,8 @@ export default class Index extends Component {
         </div>
         <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          {this.state.previous && <li class="page-item"><a class="page-link" onClick={()=>this.getLogs('previous')} href="#">Previous</a></li> || ''}
+          <li class="page-item"><a class="page-link" onClick={()=>this.getLogs('next')}> Next</a></li>
         </ul>
       </nav>
       </>
