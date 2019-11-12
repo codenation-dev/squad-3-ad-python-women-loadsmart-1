@@ -36,9 +36,6 @@ class  extends Component {
         if(this.props.auth.isAuthenticated) {
             this.props.history.push('/');
         }
-        else{
-            window.alert("User and/or password incorrect");
-        }
     }
 
     componentWillReceiveProps(nextProps) {
