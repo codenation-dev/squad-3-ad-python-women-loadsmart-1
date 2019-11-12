@@ -60,7 +60,7 @@ To do this we've used 'django-rest-swagger' package.
 http://127.0.0.1:8000/doc/ 
 (UI documentation using swagger - must be loged to acess the complete documentation)
 
-![](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/4.png)
+![teste](https://github.com/codenation-dev/squad-3-ad-python-women-loadsmart-1/blob/master/4.png)
 
 
 
