@@ -47,6 +47,7 @@ class PublicUserApiTests(TestCase):
     def test_user_exists(self):
         """Test creating a user that already exists fails"""
 
+
         payload = {
             'email': 'test2@test-api.com',
             'name': 'test',
