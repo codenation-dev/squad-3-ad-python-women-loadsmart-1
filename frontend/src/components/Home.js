@@ -171,9 +171,17 @@ class Home extends Component {
             
             </>
         )
+
+      const url = 'https://media.giphy.com/media/l2JJDrvnFUEboRgSQ/giphy.gif';
       const guestLinks = (
         <>
-        <p>Error center. Welcome, unauthenticated user.</p>
+       
+        <h2 align="center">Wellcome to Log Management Tool</h2>
+        <div className="6">
+        <img class="img-fluid" src={'https://jooinn.com/images1280_/big-data-analytics.jpg'} />
+        </div>
+
+                   
         </>
       )
         return(
